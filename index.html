@@ -851,13 +851,12 @@
         /* Responsive Adjustments for New Layout */
         @media (max-width: 768px) {
             .reality-comparison-container {
-                grid-template-columns: 1fr;
+                flex-direction: column;
                 gap: 2rem;
             }
             
             .comparison-side {
                 padding: 2rem;
-                min-height: auto;
             }
             
             .reality-number {
@@ -866,6 +865,11 @@
             
             .threshold-number {
                 font-size: 2rem;
+            }
+
+            .number-with-indicator {
+                flex-wrap: wrap;
+                align-items: center;
             }
         }
 
