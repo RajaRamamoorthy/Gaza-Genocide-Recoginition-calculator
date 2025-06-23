@@ -772,7 +772,7 @@
         <!-- Phase 1: Satirical Opening -->
         <section aria-label="Genocide Recognition Calculator" role="region" class="content-section active">
             <h1 class="satirical-heading">The Genocide Recognition Calculator™</h1>
-            <p class="satirical-subtitle">Finally, a scientific way to determine when enough is enough!</p>
+            <p class="subtitle">Finally, a scientific way to determine when enough is enough!</p>
             <div class="satirical-disclaimer">
                 <p>⚠️ DISCLAIMER: This advanced algorithmic tool helps you establish precise thresholds for when mass casualties officially qualify as "concerning." No more guesswork in humanitarian crises!</p>
             </div>
@@ -813,6 +813,9 @@
                 Calculate My Recognition Threshold
             </button>
         </section>
+
+        <!-- Section Transition -->
+        <div class="section-transition"></div>
 
         <!-- Phase 2: Reality Check -->
         <section aria-label="Reality Check" role="region" class="content-section" id="reality-section">
@@ -1102,7 +1105,7 @@
 
             const realityContent = `
                 <div class="reality-card">
-                    <h3 style="margin-bottom: 1rem; color: var(--warning-red);">Children Killed</h3>
+                    <div class="card-label">Children Killed</div>
                     <div class="reality-number">${formatNumber(summary.gaza.killed.children || 0)}</div>
                     <div class="threshold-comparison">
                         Your threshold: ${formatNumber(userThresholds.children)} children<br>
@@ -1115,17 +1118,17 @@
                     <div class="data-source">
                         <small>
                             Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
-                            <br>Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
+                            <br><span class="last-updated">Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
                                 year: 'numeric', 
                                 month: 'long', 
                                 day: 'numeric' 
-                            })}
+                            })}</span>
                         </small>
                     </div>
                 </div>
 
                 <div class="reality-card">
-                    <h3 style="margin-bottom: 1rem; color: var(--warning-red);">Total Killed</h3>
+                    <div class="card-label">Total Killed</div>
                     <div class="reality-number">${formatNumber(summary.gaza.killed.total || 0)}</div>
                     <div class="threshold-comparison">
                         Including ${formatNumber(summary.gaza.killed.women || 0)} women and ${formatNumber(summary.gaza.killed.men || 0)} men
@@ -1133,17 +1136,17 @@
                     <div class="data-source">
                         <small>
                             Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
-                            <br>Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
+                            <br><span class="last-updated">Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
                                 year: 'numeric', 
                                 month: 'long', 
                                 day: 'numeric' 
-                            })}
+                            })}</span>
                         </small>
                     </div>
                 </div>
 
                 <div class="reality-card">
-                    <h3 style="margin-bottom: 1rem; color: var(--warning-red);">Total Injured</h3>
+                    <div class="card-label">Total Injured</div>
                     <div class="reality-number">${formatNumber(summary.gaza.injured.total || 0)}</div>
                     <div class="threshold-comparison">
                         Many with life-altering injuries requiring long-term care
@@ -1151,17 +1154,17 @@
                     <div class="data-source">
                         <small>
                             Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
-                            <br>Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
+                            <br><span class="last-updated">Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
                                 year: 'numeric', 
                                 month: 'long', 
                                 day: 'numeric' 
-                            })}
+                            })}</span>
                         </small>
                     </div>
                 </div>
 
                 <div class="reality-card">
-                    <h3 style="margin-bottom: 1rem; color: var(--warning-red);">Journalists Killed</h3>
+                    <div class="card-label">Journalists Killed</div>
                     <div class="reality-number">${formatNumber(summary.gaza.killed.press || 0)}</div>
                     <div class="threshold-comparison">
                         Your threshold: ${userThresholds.journalists} journalists<br>
@@ -1174,11 +1177,11 @@
                     <div class="data-source">
                         <small>
                             Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
-                            <br>Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
+                            <br><span class="last-updated">Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
                                 year: 'numeric', 
                                 month: 'long', 
                                 day: 'numeric' 
-                            })}
+                            })}</span>
                         </small>
                     </div>
                 </div>
