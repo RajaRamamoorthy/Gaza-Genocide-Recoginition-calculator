@@ -846,17 +846,24 @@
             z-index: -1;
         }
 
-        /* Responsive Grid Adjustments */
-        @media (min-width: 768px) {
-            .reality-cards-container {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        @media (max-width: 767px) {
-            .reality-cards-container {
+        /* Responsive Adjustments for New Layout */
+        @media (max-width: 768px) {
+            .reality-comparison-container {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 2rem;
+            }
+            
+            .comparison-side {
+                padding: 2rem;
+                min-height: auto;
+            }
+            
+            .reality-number {
+                font-size: clamp(2.5rem, 10vw, 4rem);
+            }
+            
+            .threshold-number {
+                font-size: 2rem;
             }
         }
 
@@ -865,18 +872,17 @@
                 padding: 2rem 1rem;
             }
             
-            .reality-card {
-                padding: 1.5rem;
-                min-height: auto;
-            }
-            
-            .reality-number {
-                font-size: 2.5rem;
-            }
-            
             .reality-title h2 {
-                font-size: 1.75rem;
-                padding: 0 1rem;
+                font-size: 2rem;
+            }
+            
+            .memorial-section {
+                padding: 2rem;
+            }
+            
+            .memorial-quote {
+                font-size: 1.25rem;
+                padding: 1.5rem;
             }
         }
 
@@ -1005,7 +1011,7 @@
 
             <div class="data-attribution">
                 <p>Data provided by <a href="https://data.techforpalestine.org/" target="_blank" rel="noopener">Tech For Palestine</a></p>
-                <p class="last-updated">Last updated: <span id="last-updated">Loading...</span></p>
+                <p class="last-updated">Last updated: June 23, 2025</p>
             </div>
         </section>
 
@@ -1018,44 +1024,46 @@
 
         <!-- Phase 4: Memorial -->
         <section aria-label="Memorial and Call to Action" role="region" class="content-section memorial-section" id="memorial-section">
-            <h2 style="font-size: 2rem; margin-bottom: 2rem; font-weight: 300;">
-                There is no threshold.
-            </h2>
-            
-            <div class="memorial-quote">
-                "Every life matters. Every child matters. Every family matters."
-            </div>
-            
-            <div class="memorial-text">
-                <p>The arbitrary numbers we set to define when suffering becomes "worthy" of our attention reveal more about us than about the crisis itself.</p>
+            <div class="memorial-content">
+                <h2 style="font-size: 2.5rem; margin-bottom: 2rem; font-weight: 300; color: #f8fafc;">
+                    There is no threshold.
+                </h2>
                 
-                <p>Behind every statistic is a human being. A child who will never grow up. A parent who will never come home. A story that will never be told.</p>
+                <div class="memorial-quote">
+                    "Every life matters. Every child matters. Every family matters."
+                </div>
                 
-                <p>Recognition should not require reaching a threshold. Action should not wait for perfect evidence. Humanity should not be conditional.</p>
-            </div>
+                <div class="memorial-text">
+                    <p>The arbitrary numbers we set to define when suffering becomes "worthy" of our attention reveal more about us than about the crisis itself.</p>
+                    
+                    <p>Behind every statistic is a human being. A child who will never grow up. A parent who will never come home. A story that will never be told.</p>
+                    
+                    <p>Recognition should not require reaching a threshold. Action should not wait for perfect evidence. Humanity should not be conditional.</p>
+                </div>
 
-            <h3 style="margin: 3rem 0 1rem 0; font-size: 1.5rem;">Take Action</h3>
-            <div class="cta-container">
-                <a href="https://www.unrwa.org/donate" target="_blank" rel="noopener" class="cta-button">
-                    Support UNRWA
-                </a>
-                <a href="https://pcrf.net/" target="_blank" rel="noopener" class="cta-button">
-                    Palestine Children's Relief Fund
-                </a>
-                <a href="https://www.map.org.uk/" target="_blank" rel="noopener" class="cta-button">
-                    Medical Aid for Palestinians
-                </a>
-                <a href="https://islamichelp.org.uk/appeals/palestine-appeal/" target="_blank" rel="noopener" class="cta-button">
-                    Islamic Help Palestine Appeal
-                </a>
-            </div>
+                <h3 style="margin: 3rem 0 1rem 0; font-size: 1.75rem; color: #f8fafc;">Take Action</h3>
+                <div class="cta-container">
+                    <a href="https://www.unrwa.org/donate" target="_blank" rel="noopener" class="cta-button">
+                        Support UNRWA
+                    </a>
+                    <a href="https://pcrf.net/" target="_blank" rel="noopener" class="cta-button">
+                        Palestine Children's Relief Fund
+                    </a>
+                    <a href="https://www.map.org.uk/" target="_blank" rel="noopener" class="cta-button">
+                        Medical Aid for Palestinians
+                    </a>
+                    <a href="https://islamichelp.org.uk/appeals/palestine-appeal/" target="_blank" rel="noopener" class="cta-button">
+                        Islamic Help Palestine Appeal
+                    </a>
+                </div>
 
-            <div class="memorial-text" style="margin-top: 3rem; font-size: 0.875rem; color: var(--text-secondary);">
-                <p>If you need emotional support after viewing this content:</p>
-                <p>
-                    <a href="https://www.crisistext.org" target="_blank" rel="noopener" style="color: var(--data-highlight);">Crisis Text Line</a> | 
-                    <a href="https://suicidepreventionlifeline.org" target="_blank" rel="noopener" style="color: var(--data-highlight);">988 Suicide & Crisis Lifeline</a>
-                </p>
+                <div class="memorial-text" style="margin-top: 3rem; font-size: 0.875rem; opacity: 0.8;">
+                    <p>If you need emotional support after viewing this content:</p>
+                    <p>
+                        <a href="https://www.crisistext.org" target="_blank" rel="noopener" style="color: #94a3b8; font-weight: 500;">Crisis Text Line</a> | 
+                        <a href="https://suicidepreventionlifeline.org" target="_blank" rel="noopener" style="color: #94a3b8; font-weight: 500;">988 Suicide & Crisis Lifeline</a>
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -1069,8 +1077,8 @@
         // User thresholds
         let userThresholds = {
             children: 1000,
-            hospitals: 50,
-            journalists: 20
+            people: 10000,
+            hospitals: 50
         };
 
         // Current API data
@@ -1128,17 +1136,18 @@
                     { max: 10000, text: "That's more children than many cities have" },
                     { max: Infinity, text: "That's more than the child population of most counties" }
                 ],
+                people: [
+                    { max: 1000, text: "That's the population of a small neighborhood" },
+                    { max: 10000, text: "That's the population of a small town" },
+                    { max: 25000, text: "That's larger than many suburban communities" },
+                    { max: 50000, text: "That's the size of a mid-sized city" },
+                    { max: Infinity, text: "That's more than most major cities" }
+                ],
                 hospitals: [
                     { max: 25, text: "That would leave 3 out of 4 hospitals struggling" },
                     { max: 50, text: "Half the medical system would collapse" },
                     { max: 75, text: "Only 1 in 4 hospitals could function" },
                     { max: Infinity, text: "Complete medical system destruction" }
-                ],
-                journalists: [
-                    { max: 10, text: "More than most war zones in a decade" },
-                    { max: 50, text: "More than the deadliest conflicts in recent history" },
-                    { max: 100, text: "Unprecedented targeting of press" },
-                    { max: Infinity, text: "More journalists than killed in WWII" }
                 ]
             };
 
@@ -1171,24 +1180,24 @@
             const childrenValue = document.getElementById('children-value');
             const childrenComparison = document.getElementById('children-comparison');
 
+            const peopleSlider = document.getElementById('people-slider');
+            const peopleValue = document.getElementById('people-value');
+            const peopleComparison = document.getElementById('people-comparison');
+
             const hospitalsSlider = document.getElementById('hospitals-slider');
             const hospitalsValue = document.getElementById('hospitals-value');
             const hospitalsComparison = document.getElementById('hospitals-comparison');
-
-            const journalistsSlider = document.getElementById('journalists-slider');
-            const journalistsValue = document.getElementById('journalists-value');
-            const journalistsComparison = document.getElementById('journalists-comparison');
 
             childrenSlider.addEventListener('input', () => {
                 updateSlider('children', childrenSlider, childrenValue, childrenComparison);
             });
 
-            hospitalsSlider.addEventListener('input', () => {
-                updateSlider('hospitals', hospitalsSlider, hospitalsValue, hospitalsComparison);
+            peopleSlider.addEventListener('input', () => {
+                updateSlider('people', peopleSlider, peopleValue, peopleComparison);
             });
 
-            journalistsSlider.addEventListener('input', () => {
-                updateSlider('journalists', journalistsSlider, journalistsValue, journalistsComparison);
+            hospitalsSlider.addEventListener('input', () => {
+                updateSlider('hospitals', hospitalsSlider, hospitalsValue, hospitalsComparison);
             });
         }
 
@@ -1279,47 +1288,65 @@
             const announcer = document.getElementById('data-announcer');
             announcer.textContent = 'Real-time data has been loaded showing current casualties and infrastructure damage.';
 
+            const childrenExcess = Math.round(((summary.gaza.killed.children || 0) / userThresholds.children) * 100);
+            const peopleExcess = Math.round(((summary.gaza.killed.total || 0) / userThresholds.people) * 100);
+            const hospitalExcess = 85; // Approximate based on reports
+            
             const realityContent = `
-                <div class="reality-cards-container">
-                    <div class="reality-card">
-                        <div class="card-label">CHILDREN KILLED</div>
-                        <div class="reality-number">${formatNumber(summary.gaza.killed.children || 0)}</div>
-                        <div class="reality-description">
-                            <div class="threshold-comparison">
-                                <p>Your threshold: <span class="threshold-value">${formatNumber(userThresholds.children)} children</span></p>
-                                <p><strong>${summary.gaza.killed.children > userThresholds.children ? 
-                                    `Exceeded by ${formatNumber(summary.gaza.killed.children - userThresholds.children)}` : 
-                                    `${formatNumber(userThresholds.children - summary.gaza.killed.children)} below your threshold`}</strong></p>
+                <div class="reality-comparison-container">
+                    <div class="comparison-side your-thresholds">
+                        <h3 class="comparison-title">Your Thresholds</h3>
+                        
+                        <div class="comparison-item">
+                            <div class="item-label">Children Deaths</div>
+                            <div class="threshold-number">${formatNumber(userThresholds.children)}</div>
+                            <div class="impact-text">When you'd call it systematic targeting</div>
+                        </div>
+                        
+                        <div class="comparison-item">
+                            <div class="item-label">Total Deaths</div>
+                            <div class="threshold-number">${formatNumber(userThresholds.people)}</div>
+                            <div class="impact-text">When it becomes "concerning"</div>
+                        </div>
+                        
+                        <div class="comparison-item">
+                            <div class="item-label">Hospital Destruction</div>
+                            <div class="threshold-number">${userThresholds.hospitals}%</div>
+                            <div class="impact-text">When it's "systematic infrastructure targeting"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-side current-reality">
+                        <h3 class="comparison-title">Current Reality</h3>
+                        
+                        <div class="comparison-item">
+                            <div class="item-label">Children Killed</div>
+                            <div class="reality-number">${formatNumber(summary.gaza.killed.children || 0)}</div>
+                            <div class="excess-indicator">Reality is ${childrenExcess}% above your threshold</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="--progress-width: ${Math.min(childrenExcess, 100)}%;"></div>
                             </div>
+                            <div class="impact-text">That's ${Math.round((summary.gaza.killed.children || 0) / 260)} children per day</div>
                         </div>
-                    </div>
-
-                    <div class="reality-card">
-                        <div class="card-label">TOTAL KILLED</div>
-                        <div class="reality-number">${formatNumber(summary.gaza.killed.total || 0)}</div>
-                        <div class="reality-description">
-                            Including ${formatNumber(summary.gaza.killed.women || 0)} women and ${formatNumber(summary.gaza.killed.men || 0)} men
-                        </div>
-                    </div>
-
-                    <div class="reality-card">
-                        <div class="card-label">TOTAL INJURED</div>
-                        <div class="reality-number">${formatNumber(summary.gaza.injured.total || 0)}</div>
-                        <div class="reality-description">
-                            Many with life-altering injuries requiring long-term care
-                        </div>
-                    </div>
-
-                    <div class="reality-card">
-                        <div class="card-label">JOURNALISTS KILLED</div>
-                        <div class="reality-number">${formatNumber(summary.gaza.killed.press || 0)}</div>
-                        <div class="reality-description">
-                            <div class="threshold-comparison">
-                                <p>Your threshold: <span class="threshold-value">${userThresholds.journalists} journalists</span></p>
-                                <p><strong>${summary.gaza.killed.press > userThresholds.journalists ? 
-                                    `Exceeded by ${summary.gaza.killed.press - userThresholds.journalists}` : 
-                                    `${userThresholds.journalists - summary.gaza.killed.press} below your threshold`}</strong></p>
+                        
+                        <div class="comparison-item">
+                            <div class="item-label">Total Killed</div>
+                            <div class="reality-number">${formatNumber(summary.gaza.killed.total || 0)}</div>
+                            <div class="excess-indicator">Reality is ${peopleExcess}% above your threshold</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="--progress-width: ${Math.min(peopleExcess, 100)}%;"></div>
                             </div>
+                            <div class="impact-text">Including ${formatNumber(summary.gaza.killed.women || 0)} women and ${formatNumber(summary.gaza.killed.men || 0)} men</div>
+                        </div>
+                        
+                        <div class="comparison-item">
+                            <div class="item-label">Hospital Destruction</div>
+                            <div class="reality-number">${hospitalExcess}%</div>
+                            <div class="excess-indicator">Reality is ${Math.round((hospitalExcess / userThresholds.hospitals) * 100)}% above your threshold</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="--progress-width: ${Math.min(hospitalExcess, 100)}%;"></div>
+                            </div>
+                            <div class="impact-text">Medical system in complete collapse</div>
                         </div>
                     </div>
                 </div>
