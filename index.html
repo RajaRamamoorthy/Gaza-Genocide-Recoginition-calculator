@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>How Many More? - An Interactive Reflection on Humanitarian Crisis</title>
+    <meta name="description" content="An interactive experience that challenges us to confront our thresholds for recognizing humanitarian catastrophe. When is enough, enough?">
+    <meta name="keywords" content="humanitarian crisis, gaza, palestine, genocide, awareness, interactive">
+    <meta name="author" content="How Many More">
+    <link rel="canonical" href="https://howmanymore.xyz/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="How Many More? - When Is Enough, Enough?">
+    <meta property="og:description" content="An interactive experience challenging our thresholds for recognizing humanitarian catastrophe.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://howmanymore.xyz/">
+    <meta property="og:image" content="https://howmanymore.xyz/og-image.png">
+    <meta property="og:image:alt" content="How Many More? Interactive Experience">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How Many More? - When Is Enough, Enough?">
+    <meta name="twitter:description" content="An interactive experience challenging our thresholds for recognizing humanitarian catastrophe.">
+    <meta name="twitter:image" content="https://howmanymore.xyz/og-image.png">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://data.techforpalestine.org;">
+
+    <style>
+        /* CSS Custom Properties */
+        :root {
+            /* Phase 1: Satirical Calculator (Dark Comedy) */
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --accent-satire: #ff3b3b;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --slider-track: #404040;
+            --slider-thumb: #ff3b3b;
+            
+            /* Phase 2: Reality Check (Transition) */
+            --data-highlight: #ffd700;
+            --warning-red: #dc143c;
+            
+            /* Phase 3: Timeline (Somber Reality) */
+            --bg-timeline: #1e1e2e;
+            --timeline-line: #4a4a5e;
+            --milestone-dot: #ffffff;
+            --casualty-red: #8b0000;
+            --date-text: #b0b0c0;
+            
+            /* Phase 4: Memorial (Hope & Action) */
+            --memorial-black: #000000;
+            --memorial-white: #ffffff;
+            --memorial-green: #007a3d;
+            --memorial-red: #ce1126;
+            --action-button: #007a3d;
+            --action-hover: #005a2d;
+            
+            /* Typography */
+            --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Arial', sans-serif;
+            --font-mono: 'Courier New', monospace;
+            
+            /* Easing functions */
+            --ease-satirical: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --ease-reality: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-memorial: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Accessibility - Skip to content */
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--action-button);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 0 0 4px 0;
+            z-index: 1000;
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+        }
+
+        /* Screen reader only content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: clamp(1rem, 5vw, 3rem);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Content Sections */
+        .content-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s var(--ease-reality);
+            margin: 2rem 0;
+        }
+
+        .content-section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Phase 1: Satirical Opening */
+        .satirical-heading {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            transform: rotate(-1deg);
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--accent-satire);
+        }
+
+        .satirical-subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .satirical-disclaimer {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 600px;
+            padding: 1rem;
+            border: 1px dashed var(--text-secondary);
+        }
+
+        /* Threshold Sliders */
+        .threshold-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .threshold-slider-container {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .threshold-slider-container:hover {
+            border-color: var(--accent-satire);
+        }
+
+        .slider-label {
+            display: block;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .slider-input {
+            width: 100%;
+            height: 40px;
+            -webkit-appearance: none;
+            background: transparent;
+            cursor: pointer;
+            margin: 1rem 0;
+        }
+
+        .slider-input::-webkit-slider-track {
+            width: 100%;
+            height: 8px;
+            background: var(--slider-track);
+            border-radius: 4px;
+        }
+
+        .slider-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--slider-thumb);
+            border-radius: 50%;
+            cursor: grab;
+            transition: transform 0.2s ease;
+        }
+
+        .slider-input::-webkit-slider-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.2);
+        }
+
+        .slider-input::-moz-range-track {
+            width: 100%;
+            height: 8px;
+            background: var(--slider-track);
+            border-radius: 4px;
+            border: none;
+        }
+
+        .slider-input::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: var(--slider-thumb);
+            border-radius: 50%;
+            border: none;
+            cursor: grab;
+        }
+
+        .slider-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-satire);
+            margin: 1rem 0;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .comparison-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Calculate Button */
+        .calculate-button {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 3rem auto;
+            padding: 1.5rem 2rem;
+            background: var(--accent-satire);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-satirical);
+        }
+
+        .calculate-button:hover {
+            background: #ff1f1f;
+            transform: scale(1.05);
+        }
+
+        /* Reality Check Cards */
+        .reality-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reality-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--warning-red);
+        }
+
+        .actual-number {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 700;
+            color: var(--data-highlight);
+            margin: 1rem 0;
+            font-variant-numeric: tabular-nums;
+            animation: numberReveal 0.6s ease-out;
+        }
+
+        @keyframes numberReveal {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .reality-comparison {
+            font-size: 1.125rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(220, 20, 60, 0.1);
+            border-left: 4px solid var(--warning-red);
+        }
+
+        /* Timeline Styles */
+        .timeline-container {
+            position: relative;
+            padding: 3rem 0;
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-timeline) 100%);
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--timeline-line);
+            transform: translateX(-50%);
+        }
+
+        .timeline-event {
+            position: relative;
+            padding: 1rem 2rem;
+            margin: 2rem 0;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.4s ease;
+        }
+
+        .timeline-event.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-event:nth-child(even) {
+            text-align: right;
+            transform: translateX(20px);
+        }
+
+        .timeline-event.visible:nth-child(even) {
+            transform: translateX(0);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--milestone-dot);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .timeline-date {
+            font-size: 0.875rem;
+            color: var(--date-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-milestone {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-casualty {
+            color: var(--casualty-red);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Memorial Phase */
+        .memorial-section {
+            background: linear-gradient(180deg, var(--bg-timeline) 0%, var(--memorial-black) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .memorial-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            font-weight: 400;
+            text-align: center;
+            max-width: 650px;
+            margin: 2rem auto;
+        }
+
+        .memorial-quote {
+            font-size: 1.5rem;
+            font-weight: 300;
+            font-style: italic;
+            margin: 3rem auto;
+            max-width: 500px;
+            color: var(--memorial-white);
+        }
+
+        /* Call-to-Action */
+        .cta-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 3rem 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--action-button);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            background: var(--action-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Data Source Attribution */
+        .data-attribution {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        .data-attribution a {
+            color: var(--data-highlight);
+            text-decoration: none;
+        }
+
+        .data-attribution a:hover {
+            text-decoration: underline;
+        }
+
+        /* Loading States */
+        .data-loading {
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .data-loading::after {
+            content: 'Loading real-time data...';
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            animation: loadingPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Error States */
+        .error-message {
+            background: rgba(220, 20, 60, 0.1);
+            border: 1px solid var(--warning-red);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        /* Content Warning Modal */
+        .content-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .warning-content {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .warning-content h2 {
+            color: var(--warning-red);
+            margin-bottom: 1rem;
+        }
+
+        .warning-content p {
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+
+        .warning-button {
+            background: var(--action-button);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+
+        .warning-button:hover {
+            background: var(--action-hover);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .threshold-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .timeline-line {
+                left: 20px;
+            }
+            
+            .timeline-event,
+            .timeline-event:nth-child(even) {
+                text-align: left;
+                padding-left: 50px;
+                transform: translateX(0);
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+            
+            .cta-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Accessibility - Focus States */
+        *:focus {
+            outline: 3px solid var(--data-highlight);
+            outline-offset: 2px;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High Contrast Mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --bg-primary: #000000;
+                --text-primary: #ffffff;
+                --accent-satire: #ff0000;
+                --data-highlight: #ffff00;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to content for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <!-- Screen reader announcements -->
+    <div aria-live="polite" aria-atomic="true" class="sr-only" id="data-announcer"></div>
+    
+    <!-- Content Warning Modal -->
+    <div id="content-warning" class="content-warning">
+        <div class="warning-content">
+            <h2>Content Warning</h2>
+            <p>This experience contains discussion of ongoing humanitarian crisis, including casualty figures and references to violence. The content uses satirical elements to challenge denial about humanitarian catastrophes.</p>
+            <p>The experience aims to promote awareness and humanitarian action, but may be disturbing to some viewers.</p>
+            <p>Resources for emotional support will be provided at the end.</p>
+            <button class="warning-button" onclick="dismissWarning()">I Understand, Continue</button>
+            <button class="warning-button" onclick="window.location.href='https://www.crisistext.org'">Exit to Crisis Support</button>
+        </div>
+    </div>
+
+    <main role="main" aria-label="How Many More Interactive Experience" id="main-content" class="main-container">
+        
+        <!-- Phase 1: Satirical Opening -->
+        <section aria-label="Genocide Recognition Calculator" role="region" class="content-section active">
+            <h1 class="satirical-heading">The Genocide Recognition Calculator™</h1>
+            <p class="satirical-subtitle">Finally, a scientific way to determine when enough is enough!</p>
+            <div class="satirical-disclaimer">
+                <p>⚠️ DISCLAIMER: This advanced algorithmic tool helps you establish precise thresholds for when mass casualties officially qualify as "concerning." No more guesswork in humanitarian crises!</p>
+            </div>
+        </section>
+
+        <!-- Threshold Setting Phase -->
+        <section aria-label="Threshold Settings" role="region" class="content-section" id="threshold-section">
+            <h2 style="text-align: center; margin: 2rem 0; font-size: 1.75rem;">Set Your Recognition Thresholds</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Use the sliders below to define exactly when you'd consider a situation worthy of international concern:</p>
+            
+            <div class="threshold-grid">
+                <div class="threshold-slider-container">
+                    <label for="children-slider" class="slider-label">Children Deaths Threshold</label>
+                    <p style="font-size: 0.875rem; margin-bottom: 1rem; color: var(--text-secondary);">How many children need to die before you'd call it systematic targeting?</p>
+                    <input type="range" id="children-slider" class="slider-input" min="0" max="15000" value="1000" step="100">
+                    <div class="slider-value" id="children-value">1,000</div>
+                    <div class="comparison-text" id="children-comparison">That's the population of a small elementary school district</div>
+                </div>
+
+                <div class="threshold-slider-container">
+                    <label for="hospitals-slider" class="slider-label">Hospital Destruction Threshold</label>
+                    <p style="font-size: 0.875rem; margin-bottom: 1rem; color: var(--text-secondary);">What percentage of hospitals destroyed makes it "systematic infrastructure targeting"?</p>
+                    <input type="range" id="hospitals-slider" class="slider-input" min="0" max="100" value="50" step="5">
+                    <div class="slider-value" id="hospitals-value">50%</div>
+                    <div class="comparison-text" id="hospitals-comparison">That would be like destroying half of Manhattan's hospitals</div>
+                </div>
+
+                <div class="threshold-slider-container">
+                    <label for="journalists-slider" class="slider-label">Journalist Deaths Threshold</label>
+                    <p style="font-size: 0.875rem; margin-bottom: 1rem; color: var(--text-secondary);">How many journalists killed before it's "targeting press freedom"?</p>
+                    <input type="range" id="journalists-slider" class="slider-input" min="0" max="200" value="20" step="5">
+                    <div class="slider-value" id="journalists-value">20</div>
+                    <div class="comparison-text" id="journalists-comparison">That's more journalists than work at most local news stations</div>
+                </div>
+            </div>
+
+            <button class="calculate-button" onclick="revealReality()">
+                Calculate My Recognition Threshold
+            </button>
+        </section>
+
+        <!-- Phase 2: Reality Check -->
+        <section aria-label="Reality Check" role="region" class="content-section" id="reality-section">
+            <h2 style="text-align: center; margin: 2rem 0; font-size: 1.75rem; color: var(--warning-red);">
+                Reality Check: Current Situation in Gaza
+            </h2>
+            
+            <div id="reality-data" class="data-loading">
+                <!-- Data will be loaded here -->
+            </div>
+
+            <div class="data-attribution">
+                <p>Data provided by <a href="https://data.techforpalestine.org/" target="_blank" rel="noopener">Tech For Palestine</a> | 
+                Last updated: <span id="last-updated">Loading...</span></p>
+            </div>
+        </section>
+
+        <!-- Phase 3: Timeline -->
+        <section aria-label="Timeline of Events" role="region" class="content-section" id="timeline-section">
+            <h2 style="text-align: center; margin: 2rem 0; font-size: 1.75rem;">
+                The Incrementalist Timeline: Waiting for "Enough" Evidence
+            </h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Watch how the numbers grew day by day, while the world debated thresholds and definitions.
+            </p>
+            
+            <div class="timeline-container" id="timeline-container">
+                <div class="timeline-line"></div>
+                <!-- Timeline events will be generated here -->
+            </div>
+        </section>
+
+        <!-- Phase 4: Memorial -->
+        <section aria-label="Memorial and Call to Action" role="region" class="content-section memorial-section" id="memorial-section">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem; font-weight: 300;">
+                There is no threshold.
+            </h2>
+            
+            <div class="memorial-quote">
+                "Every life matters. Every child matters. Every family matters."
+            </div>
+            
+            <div class="memorial-text">
+                <p>The arbitrary numbers we set to define when suffering becomes "worthy" of our attention reveal more about us than about the crisis itself.</p>
+                
+                <p>Behind every statistic is a human being. A child who will never grow up. A parent who will never come home. A story that will never be told.</p>
+                
+                <p>Recognition should not require reaching a threshold. Action should not wait for perfect evidence. Humanity should not be conditional.</p>
+            </div>
+
+            <h3 style="margin: 3rem 0 1rem 0; font-size: 1.5rem;">Take Action</h3>
+            <div class="cta-container">
+                <a href="https://www.unrwa.org/donate" target="_blank" rel="noopener" class="cta-button">
+                    Support UNRWA
+                </a>
+                <a href="https://pcrf.net/" target="_blank" rel="noopener" class="cta-button">
+                    Palestine Children's Relief Fund
+                </a>
+                <a href="https://www.map.org.uk/" target="_blank" rel="noopener" class="cta-button">
+                    Medical Aid for Palestinians
+                </a>
+                <a href="https://islamichelp.org.uk/appeals/palestine-appeal/" target="_blank" rel="noopener" class="cta-button">
+                    Islamic Help Palestine Appeal
+                </a>
+            </div>
+
+            <div class="memorial-text" style="margin-top: 3rem; font-size: 0.875rem; color: var(--text-secondary);">
+                <p>If you need emotional support after viewing this content:</p>
+                <p>
+                    <a href="https://www.crisistext.org" target="_blank" rel="noopener" style="color: var(--data-highlight);">Crisis Text Line</a> | 
+                    <a href="https://suicidepreventionlifeline.org" target="_blank" rel="noopener" style="color: var(--data-highlight);">988 Suicide & Crisis Lifeline</a>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // API Cache for minimizing requests
+        const apiCache = new Map();
+        const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+        // User thresholds
+        let userThresholds = {
+            children: 1000,
+            hospitals: 50,
+            journalists: 20
+        };
+
+        // Current API data
+        let currentData = {};
+
+        // Fetch data with caching
+        async function fetchWithCache(url) {
+            const cached = apiCache.get(url);
+            if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+                return cached.data;
+            }
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                apiCache.set(url, { data, timestamp: Date.now() });
+                return data;
+            } catch (error) {
+                console.error('API fetch failed:', error);
+                throw error;
+            }
+        }
+
+        // Number formatting with commas
+        function formatNumber(num) {
+            return new Intl.NumberFormat().format(num);
+        }
+
+        // Animate number changes
+        function animateNumber(element, start, end, duration) {
+            const range = end - start;
+            const increment = range / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                element.textContent = formatNumber(Math.floor(current));
+            }, 16);
+        }
+
+        // Generate comparison text for sliders
+        function getComparison(type, value) {
+            const comparisons = {
+                children: [
+                    { max: 100, text: "That's about the size of a small elementary school" },
+                    { max: 500, text: "That's the population of a small neighborhood" },
+                    { max: 1000, text: "That's the population of a small elementary school district" },
+                    { max: 2500, text: "That's more than the student body of most high schools" },
+                    { max: 5000, text: "That's equivalent to a small town's entire youth population" },
+                    { max: 10000, text: "That's larger than the child population of many cities" },
+                    { max: Infinity, text: "That's more children than live in most counties" }
+                ],
+                hospitals: [
+                    { max: 10, text: "That would barely affect a major city's healthcare" },
+                    { max: 25, text: "That would strain most metropolitan areas" },
+                    { max: 50, text: "That would be like destroying half of Manhattan's hospitals" },
+                    { max: 75, text: "That would cripple any region's medical infrastructure" },
+                    { max: Infinity, text: "That would eliminate virtually all medical care" }
+                ],
+                journalists: [
+                    { max: 5, text: "That's about the size of a local news team" },
+                    { max: 10, text: "That's more than most local news stations employ" },
+                    { max: 20, text: "That's more journalists than work at most local news stations" },
+                    { max: 50, text: "That's equivalent to several major newsrooms combined" },
+                    { max: 100, text: "That's more than most national news organizations employ" },
+                    { max: Infinity, text: "That would eliminate press coverage in most countries" }
+                ]
+            };
+
+            const typeComparisons = comparisons[type] || comparisons.children;
+            return typeComparisons.find(comp => value <= comp.max)?.text || typeComparisons[typeComparisons.length - 1].text;
+        }
+
+        // Update slider values and comparisons
+        function updateSlider(type, element, valueElement, comparisonElement) {
+            const value = parseInt(element.value);
+            userThresholds[type] = value;
+            
+            if (type === 'hospitals') {
+                valueElement.textContent = value + '%';
+            } else {
+                valueElement.textContent = formatNumber(value);
+            }
+            
+            const comparison = getComparison(type, value);
+            comparisonElement.style.opacity = '0';
+            setTimeout(() => {
+                comparisonElement.textContent = comparison;
+                comparisonElement.style.opacity = '1';
+            }, 150);
+        }
+
+        // Initialize sliders
+        function initializeSliders() {
+            const childrenSlider = document.getElementById('children-slider');
+            const childrenValue = document.getElementById('children-value');
+            const childrenComparison = document.getElementById('children-comparison');
+
+            const hospitalsSlider = document.getElementById('hospitals-slider');
+            const hospitalsValue = document.getElementById('hospitals-value');
+            const hospitalsComparison = document.getElementById('hospitals-comparison');
+
+            const journalistsSlider = document.getElementById('journalists-slider');
+            const journalistsValue = document.getElementById('journalists-value');
+            const journalistsComparison = document.getElementById('journalists-comparison');
+
+            childrenSlider.addEventListener('input', () => {
+                updateSlider('children', childrenSlider, childrenValue, childrenComparison);
+            });
+
+            hospitalsSlider.addEventListener('input', () => {
+                updateSlider('hospitals', hospitalsSlider, hospitalsValue, hospitalsComparison);
+            });
+
+            journalistsSlider.addEventListener('input', () => {
+                updateSlider('journalists', journalistsSlider, journalistsValue, journalistsComparison);
+            });
+        }
+
+        // Load API data
+        async function loadApiData() {
+            try {
+                // Load summary data
+                const summaryData = await fetchWithCache('https://data.techforpalestine.org/api/v3/summary.json');
+                currentData.summary = summaryData;
+
+                // Load daily casualties
+                const dailyData = await fetchWithCache('https://data.techforpalestine.org/api/v2/casualties_daily.json');
+                currentData.daily = dailyData;
+
+                // Load infrastructure data
+                const infraData = await fetchWithCache('https://data.techforpalestine.org/api/v3/infrastructure-damaged.json');
+                currentData.infrastructure = infraData;
+
+                return true;
+            } catch (error) {
+                console.error('Failed to load API data:', error);
+                return false;
+            }
+        }
+
+        // Reveal reality section
+        async function revealReality() {
+            const realitySection = document.getElementById('reality-section');
+            const realityData = document.getElementById('reality-data');
+            
+            // Show loading state
+            realitySection.classList.add('active');
+            realityData.innerHTML = '<div class="data-loading"></div>';
+            
+            // Scroll to reality section
+            realitySection.scrollIntoView({ behavior: 'smooth' });
+
+            // Load data
+            const dataLoaded = await loadApiData();
+            
+            if (dataLoaded && currentData.summary) {
+                displayRealityData();
+            } else {
+                displayErrorState();
+            }
+
+            // Reveal timeline after delay
+            setTimeout(() => {
+                const timelineSection = document.getElementById('timeline-section');
+                timelineSection.classList.add('active');
+                generateTimeline();
+            }, 3000);
+
+            // Reveal memorial after longer delay
+            setTimeout(() => {
+                const memorialSection = document.getElementById('memorial-section');
+                memorialSection.classList.add('active');
+            }, 8000);
+        }
+
+        // Display reality data
+        function displayRealityData() {
+            const realityData = document.getElementById('reality-data');
+            const lastUpdated = document.getElementById('last-updated');
+            
+            const summary = currentData.summary;
+            
+            // Update last updated timestamp
+            if (summary.last_update) {
+                const updateDate = new Date(summary.last_update);
+                lastUpdated.textContent = updateDate.toLocaleDateString() + ' ' + updateDate.toLocaleTimeString();
+            }
+
+            // Announce data load for screen readers
+            const announcer = document.getElementById('data-announcer');
+            announcer.textContent = 'Real-time data has been loaded showing current casualties and infrastructure damage.';
+
+            const realityContent = `
+                <div class="reality-card">
+                    <h3 style="margin-bottom: 1rem; color: var(--warning-red);">Children Killed</h3>
+                    <div class="actual-number">${formatNumber(summary.gaza.killed.children || 0)}</div>
+                    <div class="reality-comparison">
+                        Your threshold: ${formatNumber(userThresholds.children)} children<br>
+                        <strong style="color: var(--warning-red);">
+                            ${summary.gaza.killed.children > userThresholds.children ? 
+                                `Exceeded by ${formatNumber(summary.gaza.killed.children - userThresholds.children)}` : 
+                                `${formatNumber(userThresholds.children - summary.gaza.killed.children)} below your threshold`}
+                        </strong>
+                    </div>
+                </div>
+
+                <div class="reality-card">
+                    <h3 style="margin-bottom: 1rem; color: var(--warning-red);">Total Killed</h3>
+                    <div class="actual-number">${formatNumber(summary.gaza.killed.total || 0)}</div>
+                    <div class="reality-comparison">
+                        Including ${formatNumber(summary.gaza.killed.women || 0)} women and ${formatNumber(summary.gaza.killed.men || 0)} men
+                    </div>
+                </div>
+
+                <div class="reality-card">
+                    <h3 style="margin-bottom: 1rem; color: var(--warning-red);">Total Injured</h3>
+                    <div class="actual-number">${formatNumber(summary.gaza.injured.total || 0)}</div>
+                    <div class="reality-comparison">
+                        Many with life-altering injuries requiring long-term care
+                    </div>
+                </div>
+
+                <div class="reality-card">
+                    <h3 style="margin-bottom: 1rem; color: var(--warning-red);">Journalists Killed</h3>
+                    <div class="actual-number">${formatNumber(summary.gaza.killed.press || 0)}</div>
+                    <div class="reality-comparison">
+                        Your threshold: ${userThresholds.journalists} journalists<br>
+                        <strong style="color: var(--warning-red);">
+                            ${summary.gaza.killed.press > userThresholds.journalists ? 
+                                `Exceeded by ${summary.gaza.killed.press - userThresholds.journalists}` : 
+                                `${userThresholds.journalists - summary.gaza.killed.press} below your threshold`}
+                        </strong>
+                    </div>
+                </div>
+            `;
+
+            realityData.innerHTML = realityContent;
+        }
+
+        // Display error state
+        function displayErrorState() {
+            const realityData = document.getElementById('reality-data');
+            realityData.innerHTML = `
+                <div class="error-message">
+                    <h3>Unable to Load Current Data</h3>
+                    <p>We couldn't retrieve the latest statistics from Tech For Palestine's API. This may be due to network issues or API maintenance.</p>
+                    <p>The last reported figures showed tens of thousands of casualties, including thousands of children.</p>
+                    <p>Please try refreshing the page or visit <a href="https://data.techforpalestine.org/" target="_blank" rel="noopener">Tech For Palestine</a> directly for current data.</p>
+                </div>
+            `;
+        }
+
+        // Generate timeline
+        function generateTimeline() {
+            const timelineContainer = document.getElementById('timeline-container');
+            
+            // Sample timeline events (would be generated from API data in production)
+            const timelineEvents = [
+                { date: 'Day 1', milestone: 'First casualties reported', casualty: 'International community calls for restraint', type: 'start' },
+                { date: 'Day 7', milestone: 'Children among the dead', casualty: 'Experts debate proportionality', type: 'escalation' },
+                { date: 'Day 15', milestone: 'Hospitals targeted', casualty: 'Some people started paying attention', type: 'infrastructure' },
+                { date: 'Day 30', milestone: 'Press freedom under attack', casualty: 'Media begins using stronger language', type: 'press' },
+                { date: 'Day 60', milestone: 'Refugee camps hit', casualty: 'Humanitarian pause discussions begin', type: 'civilians' },
+                { date: 'Day 100', milestone: 'Schools destroyed', casualty: 'Still debating definitions', type: 'education' },
+                { date: 'Day 180', milestone: 'Healthcare system collapse', casualty: 'International court cases filed', type: 'healthcare' },
+                { date: 'Day 365', milestone: 'Generational trauma', casualty: 'Waiting for more evidence', type: 'ongoing' }
+            ];
+
+            let timelineHTML = '';
+            timelineEvents.forEach((event, index) => {
+                timelineHTML += `
+                    <div class="timeline-event" data-index="${index}">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">${event.date}</div>
+                        <div class="timeline-milestone">${event.milestone}</div>
+                        <div class="timeline-casualty">${event.casualty}</div>
+                    </div>
+                `;
+            });
+
+            timelineContainer.innerHTML = '<div class="timeline-line"></div>' + timelineHTML;
+
+            // Reveal timeline events on scroll
+            const timelineObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, parseInt(entry.target.dataset.index) * 200);
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+
+            document.querySelectorAll('.timeline-event').forEach(event => {
+                timelineObserver.observe(event);
+            });
+        }
+
+        // Content warning functions
+        function dismissWarning() {
+            document.getElementById('content-warning').style.display = 'none';
+            // Initialize the experience
+            setTimeout(() => {
+                document.getElementById('threshold-section').classList.add('active');
+            }, 1000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSliders();
+            
+            // Check if user has seen warning before (could use sessionStorage)
+            const hasSeenWarning = sessionStorage.getItem('hasSeenWarning');
+            if (hasSeenWarning) {
+                dismissWarning();
+            }
+        });
+
+        // Save warning dismissal
+        function dismissWarning() {
+            sessionStorage.setItem('hasSeenWarning', 'true');
+            document.getElementById('content-warning').style.display = 'none';
+            setTimeout(() => {
+                document.getElementById('threshold-section').classList.add('active');
+            }, 1000);
+        }
+
+        // Intersection observer for progressive reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -20% 0px'
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.content-section').forEach(section => {
+                if (section.id !== 'threshold-section') { // Don't auto-reveal threshold section
+                    sectionObserver.observe(section);
+                }
+            });
+        });
+
+        // Haptic feedback for mobile
+        function triggerHaptic() {
+            if ('vibrate' in navigator) {
+                navigator.vibrate(10);
+            }
+        }
+
+        // Add haptic feedback to button clicks
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('.calculate-button, .cta-button, .warning-button')) {
+                triggerHaptic();
+            }
+        });
+    </script>
+</body>
+</html>
