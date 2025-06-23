@@ -95,7 +95,9 @@
         h1 { 
             font-family: var(--font-heading); 
             font-weight: 900; 
-            font-size: clamp(2.5rem, 6vw, 4rem); 
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
         }
         h2 { 
             font-family: var(--font-heading); 
@@ -104,6 +106,11 @@
         }
         p, body {
             font-weight: 400;
+        }
+        .subtitle { 
+            font-weight: 300; 
+            font-size: 1.25rem;
+            color: #666;
         }
 
         /* Accessibility - Skip to content */
@@ -180,15 +187,27 @@
         }
 
         .satirical-disclaimer {
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            text-align: center;
+            background: #fff8dc;
+            border: 2px solid #ffd700;
+            border-radius: 8px;
+            padding: 1.5rem;
             margin: 2rem auto;
             max-width: 600px;
-            padding: 1rem;
-            border: 1px dashed var(--text-secondary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-style: italic;
+            position: relative;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .satirical-disclaimer::before {
+            content: "⚠️";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: white;
+            padding: 0 8px;
+            font-size: 1.5rem;
         }
 
         /* Threshold Sliders */
@@ -200,15 +219,16 @@
         }
 
         .threshold-slider-container {
-            background: var(--bg-secondary);
+            background: #f8f9fa;
             padding: 2rem;
-            border-radius: 8px;
-            border: 2px solid transparent;
-            transition: border-color 0.3s ease;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
         }
 
         .threshold-slider-container:hover {
-            border-color: var(--accent-satire);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
+            border-color: #dc2626;
         }
 
         .slider-label {
@@ -230,8 +250,9 @@
         }
 
         .slider-input::-webkit-slider-track {
-            background: linear-gradient(to right, #e5e5e5 0%, var(--accent-red) var(--progress, 0%), #e5e5e5 var(--progress, 0%));
-            height: 8px;
+            background: #e9ecef;
+            height: 10px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
             border-radius: 4px;
         }
 
@@ -296,34 +317,36 @@
             width: 100%;
             max-width: 400px;
             margin: 3rem auto;
-            padding: 1.5rem 2rem;
-            background: var(--accent-red);
+            background: #dc2626;
             color: white;
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+            font-weight: 700;
             border: none;
             border-radius: 8px;
-            font-size: 1.25rem;
-            font-weight: 700;
+            box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3);
+            transition: all 0.3s ease;
             text-transform: uppercase;
+            letter-spacing: 0.05em;
             cursor: pointer;
-            transition: all 0.3s var(--ease-satirical);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .calculate-button:hover {
             background: #b91c1c;
-            transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
         }
 
         /* Reality Check Cards */
         .reality-card {
             background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 12px;
             padding: 2rem;
-            margin: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e5e7eb;
             position: relative;
+            overflow: hidden;
+            margin: 1rem;
         }
 
         .reality-card::before {
@@ -331,9 +354,17 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--warning-red);
+            right: 0;
+            height: 6px;
+            background: #dc2626;
+        }
+
+        .card-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
         }
 
         .reality-number {
@@ -480,38 +511,23 @@
         }
 
         .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--action-button);
+            background: #10b981;
             color: white;
-            text-decoration: none;
-            border-radius: 6px;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
             font-weight: 600;
-            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.3s ease;
-        }
-
-        .cta-button:hover::before {
-            left: 0;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+            text-align: center;
         }
 
         .cta-button:hover {
-            background: var(--action-hover);
+            background: #059669;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
         }
 
         /* Data Source Attribution */
@@ -535,21 +551,27 @@
         }
 
         .data-attribution {
-            margin: 2rem 0;
+            background: #f3f4f6;
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             text-align: center;
+            margin: 2rem 0;
             font-size: 0.875rem;
         }
 
         .data-attribution a {
-            color: var(--data-highlight);
+            color: #dc2626;
+            font-weight: 600;
             text-decoration: none;
         }
 
         .data-attribution a:hover {
             text-decoration: underline;
+        }
+
+        .last-updated {
+            font-weight: 500;
+            color: #374151;
         }
 
         /* Date Range Display */
@@ -584,7 +606,18 @@
             animation: loadingPulse 1.5s ease-in-out infinite;
         }
 
+        .loading-message {
+            color: #6b7280;
+            font-style: italic;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
         @keyframes loadingPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes pulse {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
         }
@@ -647,6 +680,23 @@
             background: var(--action-hover);
         }
 
+        /* Section Transitions */
+        .section-transition {
+            position: relative;
+            padding: 4rem 0;
+        }
+
+        .section-transition::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, #f5f5f5 0%, #1e293b 100%);
+            z-index: -1;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .threshold-grid {
@@ -654,19 +704,17 @@
                 gap: 1.5rem;
             }
             
-            .timeline-line {
-                left: 20px;
+            .reality-card {
+                margin-bottom: 1.5rem;
             }
             
-            .timeline-event,
-            .timeline-event:nth-child(even) {
-                text-align: left;
-                padding-left: 50px;
-                transform: translateX(0);
+            .calculate-button {
+                width: 100%;
+                padding: 1.25rem;
             }
             
-            .timeline-dot {
-                left: 20px;
+            .threshold-slider-container {
+                padding: 1.5rem;
             }
             
             .cta-container {
