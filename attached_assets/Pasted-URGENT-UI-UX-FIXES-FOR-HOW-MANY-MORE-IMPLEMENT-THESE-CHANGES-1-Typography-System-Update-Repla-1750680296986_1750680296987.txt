@@ -1,0 +1,156 @@
+URGENT UI/UX FIXES FOR "HOW MANY MORE?" - IMPLEMENT THESE CHANGES:
+1. Typography System Update
+Replace current fonts with this hierarchy:
+css/* Import Google Fonts at the top of your CSS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Crimson+Text:ital@0;1&display=swap');
+
+/* Font system */
+--font-heading: 'Inter', -apple-system, sans-serif;
+--font-body: 'Inter', -apple-system, sans-serif;
+--font-accent: 'Crimson Text', Georgia, serif;
+
+/* Headings */
+h1 { font-family: var(--font-heading); font-weight: 900; font-size: clamp(2.5rem, 6vw, 4rem); }
+h2 { font-family: var(--font-heading); font-weight: 700; font-size: clamp(2rem, 4vw, 2.5rem); }
+/* Body text should use font-weight: 400 for readability */
+2. New Color Scheme
+Replace the black background with a lighter, more accessible design:
+css:root {
+  /* Phase 1: Satirical */
+  --bg-primary: #f5f5f5;        /* Light grey background */
+  --bg-secondary: #ffffff;       /* White cards */
+  --text-primary: #1a1a1a;       /* Dark text on light bg */
+  --text-secondary: #666666;     /* Grey subtext */
+  --accent-red: #dc2626;         /* Bright red for sliders */
+  --border-color: #e5e5e5;       /* Light borders */
+  
+  /* Phase 2: Reality (keep darker for contrast) */
+  --bg-reality: #1e293b;         /* Dark blue-grey */
+  --text-reality: #f8fafc;       /* Light text */
+}
+3. Fix Slider Visibility
+Make sliders clearly visible and interactive:
+css.slider-input {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #e5e5e5;  /* Visible track */
+  border-radius: 4px;
+  outline: none;
+}
+
+.slider-input::-webkit-slider-track {
+  background: linear-gradient(to right, #e5e5e5 0%, #dc2626 var(--progress, 0%), #e5e5e5 var(--progress, 0%));
+  height: 8px;
+  border-radius: 4px;
+}
+
+.slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  background: #dc2626;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+4. Rewrite Slider Comparison Text
+Replace the current comparison text with more impactful, accurate comparisons:
+For Children Deaths Threshold:
+
+0-100: "That's an entire elementary school classroom"
+100-1,000: "That's more than all students in a small school"
+1,000-5,000: "That's the entire child population of a small town"
+5,000-10,000: "That's more children than many cities have"
+10,000+: "That's more than the child population of {dynamic city name}"
+
+For Hospital Destruction:
+
+0-25%: "That would leave 3 out of 4 hospitals struggling"
+25-50%: "Half the medical system would collapse"
+50-75%: "Only 1 in 4 hospitals could function"
+75-100%: "Complete medical system destruction"
+
+For Journalist Deaths:
+
+0-10: "More than most war zones in a decade"
+10-50: "More than the deadliest conflicts in recent history"
+50-100: "Unprecedented targeting of press"
+100+: "More journalists than killed in WWII"
+
+5. Fix Reality Check UI
+css.reality-card {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.reality-number {
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 900;
+  color: #dc2626;
+  line-height: 1;
+  margin: 0.5rem 0;
+}
+
+.threshold-comparison {
+  background: #fee2e2;
+  border-left: 4px solid #dc2626;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 0 8px 8px 0;
+}
+6. Remove Timeline Section
+DELETE the entire timeline section since real-time updates would require backend integration. Replace it with a simple progression indicator showing how casualties have accumulated over time using the data already fetched from Tech For Palestine APIs. Add this instead:
+javascript// After fetching data, create a simple date range display
+const dataDateRange = document.createElement('div');
+dataDateRange.className = 'date-range-display';
+dataDateRange.innerHTML = `
+  <h3>Since October 7, 2023</h3>
+  <p>${calculateDaysSince('2023-10-07')} days of ongoing crisis</p>
+`;
+7. Add Last Updated Indicator
+Add this immediately after fetching Tech For Palestine data:
+javascript// After successful API fetch, add to each data card:
+const lastUpdated = document.createElement('div');
+lastUpdated.className = 'data-source';
+lastUpdated.innerHTML = `
+  <small>
+    Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
+    <br>Last updated: ${new Date(data.last_updated || Date.now()).toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    })}
+  </small>
+`;
+// Append to each reality card
+
+/* CSS for data source */
+.data-source {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e5e5;
+  text-align: center;
+  color: #666;
+}
+
+.data-source a {
+  color: #dc2626;
+  text-decoration: none;
+  font-weight: 500;
+}
+Additional Critical Fixes:
+
+Ensure all cards have consistent spacing and padding
+Add hover states to all interactive elements
+Make sure the transition from light (satirical) to dark (reality) sections is smooth
+Test on mobile to ensure sliders are easily draggable
+Add a subtle box-shadow to raised elements for depth
+
+IMPORTANT: Keep the existing flow and content, just apply these visual and textual improvements. The goal is better usability while maintaining the emotional impact of the experience.
