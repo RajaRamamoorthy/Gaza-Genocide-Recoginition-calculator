@@ -1,0 +1,249 @@
+The Reality Check section has major layout and readability issues. Fix these problems immediately:
+1. Fix the Gradient Background
+Replace the harsh gradient with a subtle transition:
+css.reality-section {
+  position: relative;
+  background: #f5f5f5;
+  padding: 4rem 2rem;
+  margin-top: 3rem;
+}
+
+.reality-section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%);
+}
+
+/* Dark background only for the final memorial section */
+.memorial-section {
+  background: #1e293b;
+  color: white;
+  padding: 4rem 2rem;
+  margin-top: 0;
+}
+2. Fix the Reality Check Title
+Make the title readable and prominent:
+css.reality-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 10;
+}
+
+.reality-title h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  background: white;
+  display: inline-block;
+  padding: 0 2rem;
+}
+3. Fix Card Layout with CSS Grid
+Create a proper responsive grid:
+css.reality-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .reality-cards-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .reality-cards-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+4. Redesign the Reality Cards
+Make cards consistent and readable:
+css.reality-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reality-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #dc2626;
+  border-radius: 12px 12px 0 0;
+}
+
+.card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.reality-number {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 900;
+  color: #dc2626;
+  line-height: 1;
+  margin-bottom: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.reality-description {
+  font-size: 0.875rem;
+  color: #374151;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.threshold-comparison {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.threshold-comparison p {
+  font-size: 0.875rem;
+  color: #991b1b;
+  margin: 0;
+}
+
+.threshold-value {
+  font-weight: 700;
+  color: #dc2626;
+}
+5. Fix Number Formatting
+Update JavaScript to properly format numbers:
+javascript// Function to format numbers with proper commas
+function formatNumber(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// When displaying numbers, use:
+document.querySelector('.children-number').textContent = formatNumber(18000);
+document.querySelector('.total-killed-number').textContent = formatNumber(55998);
+document.querySelector('.injured-number').textContent = formatNumber(131559);
+document.querySelector('.journalists-number').textContent = formatNumber(227);
+6. Fix Data Attribution
+Make the data source more visible:
+css.data-attribution {
+  text-align: center;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  margin-top: 2rem;
+  border: 1px solid #e5e7eb;
+}
+
+.data-attribution p {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin: 0.25rem 0;
+}
+
+.data-attribution a {
+  color: #dc2626;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.data-attribution a:hover {
+  text-decoration: underline;
+}
+
+.last-updated {
+  font-weight: 500;
+  color: #1f2937;
+}
+7. Fix Loading State
+Make loading indicators visible:
+css.loading-indicator {
+  display: inline-block;
+  color: #6b7280;
+  font-size: 0.75rem;
+  font-style: italic;
+  padding: 0.5rem 1rem;
+  background: #f3f4f6;
+  border-radius: 9999px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+8. Responsive Adjustments
+Ensure mobile readability:
+css@media (max-width: 640px) {
+  .reality-section {
+    padding: 2rem 1rem;
+  }
+  
+  .reality-card {
+    padding: 1.5rem;
+    min-height: auto;
+  }
+  
+  .reality-number {
+    font-size: 2.5rem;
+  }
+  
+  .reality-title h2 {
+    font-size: 1.75rem;
+    padding: 0 1rem;
+  }
+}
+9. Update HTML Structure
+Ensure your HTML follows this pattern:
+html<section class="reality-section">
+  <div class="reality-title">
+    <h2>Reality Check: Current Situation in Gaza</h2>
+  </div>
+  
+  <div class="reality-cards-container">
+    <!-- Each card should follow this structure -->
+    <div class="reality-card">
+      <div class="card-label">CHILDREN KILLED</div>
+      <div class="reality-number">18,000</div>
+      <div class="reality-description">
+        <div class="threshold-comparison">
+          <p>Your threshold: <span class="threshold-value">3,900 children</span></p>
+          <p><strong>Exceeded by 14,100</strong></p>
+        </div>
+      </div>
+    </div>
+    <!-- Repeat for other cards -->
+  </div>
+  
+  <div class="data-attribution">
+    <p>Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a></p>
+    <p class="last-updated">Last updated: June 23, 2025</p>
+  </div>
+</section>
+CRITICAL: Test on mobile devices to ensure all numbers are fully visible and cards stack properly. The layout should be clean, readable, and emotionally impactful without being visually overwhelming.

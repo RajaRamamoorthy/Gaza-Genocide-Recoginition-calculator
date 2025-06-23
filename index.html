@@ -358,16 +358,61 @@
             box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
         }
 
+        /* Reality Section Layout */
+        .reality-section {
+            position: relative;
+            background: #f5f5f5;
+            padding: 4rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .reality-section::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%);
+        }
+
+        .reality-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .reality-title h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            background: white;
+            display: inline-block;
+            padding: 0 2rem;
+        }
+
+        .reality-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
         /* Reality Check Cards */
         .reality-card {
             background: white;
+            border-radius: 12px;
             padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             border: 1px solid #e5e7eb;
             position: relative;
-            overflow: hidden;
-            margin: 1rem;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
         }
 
         .reality-card::before {
@@ -376,35 +421,54 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 6px;
+            height: 4px;
             background: #dc2626;
+            border-radius: 12px 12px 0 0;
         }
 
         .card-label {
-            font-weight: 500;
+            font-size: 0.75rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            font-size: 0.875rem;
             color: #6b7280;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .reality-number {
-            font-size: clamp(3rem, 7vw, 5rem);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
             font-weight: 900;
-            color: var(--accent-red);
+            color: #dc2626;
             line-height: 1;
-            margin: 0.5rem 0;
+            margin-bottom: 1rem;
             font-variant-numeric: tabular-nums;
             animation: numberReveal 0.6s ease-out;
         }
 
+        .reality-description {
+            font-size: 0.875rem;
+            color: #374151;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
         .threshold-comparison {
-            background: #fee2e2;
-            border-left: 4px solid var(--accent-red);
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
             padding: 1rem;
             margin-top: 1rem;
-            border-radius: 0 8px 8px 0;
+        }
+
+        .threshold-comparison p {
+            font-size: 0.875rem;
+            color: #991b1b;
+            margin: 0;
+        }
+
+        .threshold-value {
+            font-weight: 700;
+            color: #dc2626;
         }
 
         @keyframes numberReveal {
@@ -498,8 +562,10 @@
 
         /* Memorial Phase */
         .memorial-section {
-            background: linear-gradient(180deg, var(--bg-timeline) 0%, var(--memorial-black) 100%);
+            background: #1e293b;
+            color: white;
             padding: 4rem 2rem;
+            margin-top: 0;
             text-align: center;
         }
 
@@ -573,12 +639,18 @@
         }
 
         .data-attribution {
-            background: #f3f4f6;
-            padding: 1rem;
-            border-radius: 8px;
             text-align: center;
-            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .data-attribution p {
             font-size: 0.875rem;
+            color: #4b5563;
+            margin: 0.25rem 0;
         }
 
         .data-attribution a {
@@ -593,7 +665,7 @@
 
         .last-updated {
             font-weight: 500;
-            color: #374151;
+            color: #1f2937;
         }
 
         /* Date Range Display */
@@ -628,10 +700,15 @@
             animation: loadingPulse 1.5s ease-in-out infinite;
         }
 
-        .loading-message {
+        .loading-indicator {
+            display: inline-block;
             color: #6b7280;
+            font-size: 0.75rem;
             font-style: italic;
-            animation: pulse 1.5s ease-in-out infinite;
+            padding: 0.5rem 1rem;
+            background: #f3f4f6;
+            border-radius: 9999px;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
         @keyframes loadingPulse {
@@ -640,8 +717,12 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
         }
 
         /* Error States */
@@ -719,15 +800,45 @@
             z-index: -1;
         }
 
+        /* Responsive Grid Adjustments */
+        @media (min-width: 768px) {
+            .reality-cards-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .reality-cards-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .reality-section {
+                padding: 2rem 1rem;
+            }
+            
+            .reality-card {
+                padding: 1.5rem;
+                min-height: auto;
+            }
+            
+            .reality-number {
+                font-size: 2.5rem;
+            }
+            
+            .reality-title h2 {
+                font-size: 1.75rem;
+                padding: 0 1rem;
+            }
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .threshold-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
-            }
-            
-            .reality-card {
-                margin-bottom: 1.5rem;
             }
             
             .calculate-button {
@@ -836,22 +947,19 @@
             </button>
         </section>
 
-        <!-- Section Transition -->
-        <div class="section-transition"></div>
-
         <!-- Phase 2: Reality Check -->
-        <section aria-label="Reality Check" role="region" class="content-section" id="reality-section">
-            <h2 style="text-align: center; margin: 2rem 0; font-size: 1.75rem; color: var(--warning-red);">
-                Reality Check: Current Situation in Gaza
-            </h2>
+        <section aria-label="Reality Check" role="region" class="content-section reality-section" id="reality-section">
+            <div class="reality-title">
+                <h2>Reality Check: Current Situation in Gaza</h2>
+            </div>
             
             <div id="reality-data" class="data-loading">
                 <!-- Data will be loaded here -->
             </div>
 
             <div class="data-attribution">
-                <p>Data provided by <a href="https://data.techforpalestine.org/" target="_blank" rel="noopener">Tech For Palestine</a> | 
-                Last updated: <span id="last-updated">Loading...</span></p>
+                <p>Data provided by <a href="https://data.techforpalestine.org/" target="_blank" rel="noopener">Tech For Palestine</a></p>
+                <p class="last-updated">Last updated: <span id="last-updated">Loading...</span></p>
             </div>
         </section>
 
@@ -945,7 +1053,7 @@
 
         // Number formatting with commas
         function formatNumber(num) {
-            return new Intl.NumberFormat().format(num);
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
         // Animate number changes
@@ -1126,85 +1234,47 @@
             announcer.textContent = 'Real-time data has been loaded showing current casualties and infrastructure damage.';
 
             const realityContent = `
-                <div class="reality-card">
-                    <div class="card-label">Children Killed</div>
-                    <div class="reality-number">${formatNumber(summary.gaza.killed.children || 0)}</div>
-                    <div class="threshold-comparison">
-                        Your threshold: ${formatNumber(userThresholds.children)} children<br>
-                        <strong style="color: var(--warning-red);">
-                            ${summary.gaza.killed.children > userThresholds.children ? 
-                                `Exceeded by ${formatNumber(summary.gaza.killed.children - userThresholds.children)}` : 
-                                `${formatNumber(userThresholds.children - summary.gaza.killed.children)} below your threshold`}
-                        </strong>
+                <div class="reality-cards-container">
+                    <div class="reality-card">
+                        <div class="card-label">CHILDREN KILLED</div>
+                        <div class="reality-number">${formatNumber(summary.gaza.killed.children || 0)}</div>
+                        <div class="reality-description">
+                            <div class="threshold-comparison">
+                                <p>Your threshold: <span class="threshold-value">${formatNumber(userThresholds.children)} children</span></p>
+                                <p><strong>${summary.gaza.killed.children > userThresholds.children ? 
+                                    `Exceeded by ${formatNumber(summary.gaza.killed.children - userThresholds.children)}` : 
+                                    `${formatNumber(userThresholds.children - summary.gaza.killed.children)} below your threshold`}</strong></p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="data-source">
-                        <small>
-                            Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
-                            <br><span class="last-updated">Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
-                                year: 'numeric', 
-                                month: 'long', 
-                                day: 'numeric' 
-                            })}</span>
-                        </small>
-                    </div>
-                </div>
 
-                <div class="reality-card">
-                    <div class="card-label">Total Killed</div>
-                    <div class="reality-number">${formatNumber(summary.gaza.killed.total || 0)}</div>
-                    <div class="threshold-comparison">
-                        Including ${formatNumber(summary.gaza.killed.women || 0)} women and ${formatNumber(summary.gaza.killed.men || 0)} men
+                    <div class="reality-card">
+                        <div class="card-label">TOTAL KILLED</div>
+                        <div class="reality-number">${formatNumber(summary.gaza.killed.total || 0)}</div>
+                        <div class="reality-description">
+                            Including ${formatNumber(summary.gaza.killed.women || 0)} women and ${formatNumber(summary.gaza.killed.men || 0)} men
+                        </div>
                     </div>
-                    <div class="data-source">
-                        <small>
-                            Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
-                            <br><span class="last-updated">Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
-                                year: 'numeric', 
-                                month: 'long', 
-                                day: 'numeric' 
-                            })}</span>
-                        </small>
-                    </div>
-                </div>
 
-                <div class="reality-card">
-                    <div class="card-label">Total Injured</div>
-                    <div class="reality-number">${formatNumber(summary.gaza.injured.total || 0)}</div>
-                    <div class="threshold-comparison">
-                        Many with life-altering injuries requiring long-term care
+                    <div class="reality-card">
+                        <div class="card-label">TOTAL INJURED</div>
+                        <div class="reality-number">${formatNumber(summary.gaza.injured.total || 0)}</div>
+                        <div class="reality-description">
+                            Many with life-altering injuries requiring long-term care
+                        </div>
                     </div>
-                    <div class="data-source">
-                        <small>
-                            Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
-                            <br><span class="last-updated">Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
-                                year: 'numeric', 
-                                month: 'long', 
-                                day: 'numeric' 
-                            })}</span>
-                        </small>
-                    </div>
-                </div>
 
-                <div class="reality-card">
-                    <div class="card-label">Journalists Killed</div>
-                    <div class="reality-number">${formatNumber(summary.gaza.killed.press || 0)}</div>
-                    <div class="threshold-comparison">
-                        Your threshold: ${userThresholds.journalists} journalists<br>
-                        <strong style="color: var(--warning-red);">
-                            ${summary.gaza.killed.press > userThresholds.journalists ? 
-                                `Exceeded by ${summary.gaza.killed.press - userThresholds.journalists}` : 
-                                `${userThresholds.journalists - summary.gaza.killed.press} below your threshold`}
-                        </strong>
-                    </div>
-                    <div class="data-source">
-                        <small>
-                            Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
-                            <br><span class="last-updated">Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
-                                year: 'numeric', 
-                                month: 'long', 
-                                day: 'numeric' 
-                            })}</span>
-                        </small>
+                    <div class="reality-card">
+                        <div class="card-label">JOURNALISTS KILLED</div>
+                        <div class="reality-number">${formatNumber(summary.gaza.killed.press || 0)}</div>
+                        <div class="reality-description">
+                            <div class="threshold-comparison">
+                                <p>Your threshold: <span class="threshold-value">${userThresholds.journalists} journalists</span></p>
+                                <p><strong>${summary.gaza.killed.press > userThresholds.journalists ? 
+                                    `Exceeded by ${summary.gaza.killed.press - userThresholds.journalists}` : 
+                                    `${userThresholds.journalists - summary.gaza.killed.press} below your threshold`}</strong></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
