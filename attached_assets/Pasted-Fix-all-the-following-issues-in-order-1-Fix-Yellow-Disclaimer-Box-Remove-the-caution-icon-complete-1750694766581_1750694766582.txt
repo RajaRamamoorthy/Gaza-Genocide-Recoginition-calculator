@@ -1,0 +1,50 @@
+Fix all the following issues in order:
+1. Fix Yellow Disclaimer Box
+Remove the caution icon completely. Keep only the text in the yellow box with no icon and no white background circle. Make the disclaimer text more concise.
+2. Update Recognition Threshold Sliders
+Change the three threshold categories to:
+
+Children Deaths Threshold: "How many children need to die before you'd call it systematic targeting?"
+People Deaths Threshold: "How many people need to die before it's concerning?"
+Hospital Destruction Threshold: "What percentage of hospitals destroyed makes it 'systematic infrastructure targeting'?"
+
+Remove the journalist deaths threshold completely. Update all references to these three categories throughout the code.
+3. Remove Empty Gradient Box
+Delete the empty black gradient box that appears above "Reality Check: Current Situation in Gaza". The Reality Check section should start cleanly without any decorative gradient elements above it.
+4. Completely Redesign Reality Check Section
+Create a powerful new design that shows the stark contrast between user thresholds and reality:
+REALITY CHECK DESIGN:
+- Use a side-by-side comparison layout
+- Left side: "Your Thresholds" (what user selected)
+- Right side: "Current Reality" (actual numbers)
+- Use visual bars or progress indicators showing how far reality exceeds thresholds
+- Add percentage indicators like "Reality is 460% above your threshold"
+- Use red color progression - darker red for higher excess
+- Include impactful one-liner for each stat like "That's 14 children per day"
+- Make numbers HUGE and impossible to ignore
+- Add subtle animation when numbers load (count up effect)
+5. Fix Persistent Loading States
+Find all instances of "Loading real-time data..." text and ensure they're replaced with actual data once loaded. Remove the loading indicator after data fetch is complete. Check the updateStats() or fetchData() function.
+6. Fix Last Updated Date
+Replace the forever-loading state with a simple static date. Find where it says "Last updated:" and just hardcode "Last updated: June 23, 2025" without any loading animation.
+7. Redesign Final Dark Section
+The memorial/final section needs complete redesign:
+NEW DESIGN:
+- Change background from pure black to dark blue-gray (#1e293b)
+- Increase text contrast with white or light gray text
+- Add subtle background texture or gradient for depth
+- Make the quote larger and more readable (font-size: 1.5rem minimum)
+- Add proper spacing (padding: 4rem)
+- Style the action buttons with better contrast
+- Add hover effects to buttons
+- Ensure all text has proper line-height for readability
+- Consider adding a subtle border or frame around the quote
+Additional Instructions:
+
+Test all changes on mobile devices
+Ensure smooth transitions between sections
+Remove any console.log statements
+Verify all data loads properly without infinite loading states
+Make the entire experience more impactful and emotionally resonant while maintaining professionalism
+
+CRITICAL: The Reality Check section is the heart of this experience. Make it impossible to ignore - use bold design choices, strong contrast, and clear visual hierarchy to communicate the severity of the situation.
