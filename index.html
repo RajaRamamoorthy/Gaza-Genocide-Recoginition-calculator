@@ -1008,18 +1008,27 @@
                 displayErrorState();
             }
 
-            // Reveal timeline after delay
+            // Generate and show date range display
             setTimeout(() => {
-                const timelineSection = document.getElementById('timeline-section');
-                timelineSection.classList.add('active');
-                generateTimeline();
+                generateDateRangeDisplay();
+                const durationSection = document.getElementById('duration-section');
+                durationSection.classList.add('active');
             }, 3000);
 
             // Reveal memorial after longer delay
             setTimeout(() => {
                 const memorialSection = document.getElementById('memorial-section');
                 memorialSection.classList.add('active');
-            }, 8000);
+            }, 6000);
+        }
+
+        // Calculate days since October 7, 2023
+        function calculateDaysSince(startDate) {
+            const start = new Date(startDate);
+            const today = new Date();
+            const diffTime = Math.abs(today - start);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays;
         }
 
         // Display reality data
@@ -1032,7 +1041,11 @@
             // Update last updated timestamp
             if (summary.last_update) {
                 const updateDate = new Date(summary.last_update);
-                lastUpdated.textContent = updateDate.toLocaleDateString() + ' ' + updateDate.toLocaleTimeString();
+                lastUpdated.textContent = updateDate.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
             }
 
             // Announce data load for screen readers
@@ -1042,8 +1055,8 @@
             const realityContent = `
                 <div class="reality-card">
                     <h3 style="margin-bottom: 1rem; color: var(--warning-red);">Children Killed</h3>
-                    <div class="actual-number">${formatNumber(summary.gaza.killed.children || 0)}</div>
-                    <div class="reality-comparison">
+                    <div class="reality-number">${formatNumber(summary.gaza.killed.children || 0)}</div>
+                    <div class="threshold-comparison">
                         Your threshold: ${formatNumber(userThresholds.children)} children<br>
                         <strong style="color: var(--warning-red);">
                             ${summary.gaza.killed.children > userThresholds.children ? 
@@ -1051,28 +1064,58 @@
                                 `${formatNumber(userThresholds.children - summary.gaza.killed.children)} below your threshold`}
                         </strong>
                     </div>
+                    <div class="data-source">
+                        <small>
+                            Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
+                            <br>Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: 'numeric' 
+                            })}
+                        </small>
+                    </div>
                 </div>
 
                 <div class="reality-card">
                     <h3 style="margin-bottom: 1rem; color: var(--warning-red);">Total Killed</h3>
-                    <div class="actual-number">${formatNumber(summary.gaza.killed.total || 0)}</div>
-                    <div class="reality-comparison">
+                    <div class="reality-number">${formatNumber(summary.gaza.killed.total || 0)}</div>
+                    <div class="threshold-comparison">
                         Including ${formatNumber(summary.gaza.killed.women || 0)} women and ${formatNumber(summary.gaza.killed.men || 0)} men
+                    </div>
+                    <div class="data-source">
+                        <small>
+                            Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
+                            <br>Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: 'numeric' 
+                            })}
+                        </small>
                     </div>
                 </div>
 
                 <div class="reality-card">
                     <h3 style="margin-bottom: 1rem; color: var(--warning-red);">Total Injured</h3>
-                    <div class="actual-number">${formatNumber(summary.gaza.injured.total || 0)}</div>
-                    <div class="reality-comparison">
+                    <div class="reality-number">${formatNumber(summary.gaza.injured.total || 0)}</div>
+                    <div class="threshold-comparison">
                         Many with life-altering injuries requiring long-term care
+                    </div>
+                    <div class="data-source">
+                        <small>
+                            Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
+                            <br>Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: 'numeric' 
+                            })}
+                        </small>
                     </div>
                 </div>
 
                 <div class="reality-card">
                     <h3 style="margin-bottom: 1rem; color: var(--warning-red);">Journalists Killed</h3>
-                    <div class="actual-number">${formatNumber(summary.gaza.killed.press || 0)}</div>
-                    <div class="reality-comparison">
+                    <div class="reality-number">${formatNumber(summary.gaza.killed.press || 0)}</div>
+                    <div class="threshold-comparison">
                         Your threshold: ${userThresholds.journalists} journalists<br>
                         <strong style="color: var(--warning-red);">
                             ${summary.gaza.killed.press > userThresholds.journalists ? 
@@ -1080,10 +1123,37 @@
                                 `${userThresholds.journalists - summary.gaza.killed.press} below your threshold`}
                         </strong>
                     </div>
+                    <div class="data-source">
+                        <small>
+                            Data from <a href="https://data.techforpalestine.org/" target="_blank">Tech For Palestine</a>
+                            <br>Last updated: ${new Date(summary.last_update || Date.now()).toLocaleDateString('en-US', { 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: 'numeric' 
+                            })}
+                        </small>
+                    </div>
                 </div>
             `;
 
             realityData.innerHTML = realityContent;
+        }
+
+        // Generate date range display
+        function generateDateRangeDisplay() {
+            const dateRangeContainer = document.getElementById('date-range-display');
+            const daysSince = calculateDaysSince('2023-10-07');
+            
+            dateRangeContainer.innerHTML = `
+                <div class="date-range-display">
+                    <h3>Since October 7, 2023</h3>
+                    <p>${formatNumber(daysSince)} days of ongoing crisis</p>
+                    <p style="margin-top: 1rem; color: var(--text-secondary);">
+                        Every day, the numbers grow. Every day, families are shattered.
+                        Every day, the world continues to debate thresholds.
+                    </p>
+                </div>
+            `;
         }
 
         // Display error state
@@ -1099,56 +1169,10 @@
             `;
         }
 
-        // Generate timeline
-        function generateTimeline() {
-            const timelineContainer = document.getElementById('timeline-container');
-            
-            // Sample timeline events (would be generated from API data in production)
-            const timelineEvents = [
-                { date: 'Day 1', milestone: 'First casualties reported', casualty: 'International community calls for restraint', type: 'start' },
-                { date: 'Day 7', milestone: 'Children among the dead', casualty: 'Experts debate proportionality', type: 'escalation' },
-                { date: 'Day 15', milestone: 'Hospitals targeted', casualty: 'Some people started paying attention', type: 'infrastructure' },
-                { date: 'Day 30', milestone: 'Press freedom under attack', casualty: 'Media begins using stronger language', type: 'press' },
-                { date: 'Day 60', milestone: 'Refugee camps hit', casualty: 'Humanitarian pause discussions begin', type: 'civilians' },
-                { date: 'Day 100', milestone: 'Schools destroyed', casualty: 'Still debating definitions', type: 'education' },
-                { date: 'Day 180', milestone: 'Healthcare system collapse', casualty: 'International court cases filed', type: 'healthcare' },
-                { date: 'Day 365', milestone: 'Generational trauma', casualty: 'Waiting for more evidence', type: 'ongoing' }
-            ];
-
-            let timelineHTML = '';
-            timelineEvents.forEach((event, index) => {
-                timelineHTML += `
-                    <div class="timeline-event" data-index="${index}">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">${event.date}</div>
-                        <div class="timeline-milestone">${event.milestone}</div>
-                        <div class="timeline-casualty">${event.casualty}</div>
-                    </div>
-                `;
-            });
-
-            timelineContainer.innerHTML = '<div class="timeline-line"></div>' + timelineHTML;
-
-            // Reveal timeline events on scroll
-            const timelineObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add('visible');
-                        }, parseInt(entry.target.dataset.index) * 200);
-                    }
-                });
-            }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
-
-            document.querySelectorAll('.timeline-event').forEach(event => {
-                timelineObserver.observe(event);
-            });
-        }
-
         // Content warning functions
         function dismissWarning() {
+            sessionStorage.setItem('hasSeenWarning', 'true');
             document.getElementById('content-warning').style.display = 'none';
-            // Initialize the experience
             setTimeout(() => {
                 document.getElementById('threshold-section').classList.add('active');
             }, 1000);
@@ -1164,15 +1188,6 @@
                 dismissWarning();
             }
         });
-
-        // Save warning dismissal
-        function dismissWarning() {
-            sessionStorage.setItem('hasSeenWarning', 'true');
-            document.getElementById('content-warning').style.display = 'none';
-            setTimeout(() => {
-                document.getElementById('threshold-section').classList.add('active');
-            }, 1000);
-        }
 
         // Intersection observer for progressive reveal
         const observerOptions = {
