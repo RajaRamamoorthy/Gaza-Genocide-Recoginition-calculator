@@ -408,9 +408,12 @@
         }
 
         .comparison-item {
-            margin-bottom: 2.5rem;
-            padding-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
             border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            height: 140px;
         }
 
         .comparison-item:last-child {
@@ -447,12 +450,13 @@
         .excess-indicator {
             background: #7f1d1d;
             color: white;
-            padding: 0.75rem 1.25rem;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1.125rem;
-            margin-bottom: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            margin-bottom: 0.25rem;
             text-align: center;
+            display: inline-block;
         }
 
         .impact-text {
@@ -970,7 +974,7 @@
             
             <div class="threshold-grid">
                 <div class="threshold-slider-container">
-                    <label for="children-slider" class="slider-label">Children Deaths Threshold</label>
+                    <label for="children-slider" class="slider-label">Children Deaths</label>
                     <p style="font-size: 0.875rem; margin-bottom: 1rem; color: var(--text-secondary);">How many children need to die before you'd call it systematic targeting?</p>
                     <input type="range" id="children-slider" class="slider-input" min="0" max="20000" value="1000" step="100">
                     <div class="slider-value" id="children-value">1,000</div>
@@ -978,7 +982,7 @@
                 </div>
 
                 <div class="threshold-slider-container">
-                    <label for="hospitals-slider" class="slider-label">Hospital Destruction Threshold</label>
+                    <label for="hospitals-slider" class="slider-label">Hospital Destruction</label>
                     <p style="font-size: 0.875rem; margin-bottom: 1rem; color: var(--text-secondary);">What percentage of hospitals destroyed makes it "systematic infrastructure targeting"?</p>
                     <input type="range" id="hospitals-slider" class="slider-input" min="0" max="100" value="50" step="5">
                     <div class="slider-value" id="hospitals-value">50%</div>
@@ -986,7 +990,7 @@
                 </div>
 
                 <div class="threshold-slider-container">
-                    <label for="people-slider" class="slider-label">People Deaths Threshold</label>
+                    <label for="people-slider" class="slider-label">People Deaths</label>
                     <p style="font-size: 0.875rem; margin-bottom: 1rem; color: var(--text-secondary);">How many people need to die before it's concerning?</p>
                     <input type="range" id="people-slider" class="slider-input" min="0" max="60000" value="10000" step="500">
                     <div class="slider-value" id="people-value">10,000</div>
