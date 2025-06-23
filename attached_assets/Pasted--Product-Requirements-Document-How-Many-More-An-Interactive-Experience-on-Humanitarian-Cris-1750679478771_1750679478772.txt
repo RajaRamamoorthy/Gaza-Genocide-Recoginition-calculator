@@ -1,0 +1,242 @@
+# Product Requirements Document: "How Many More?"
+## An Interactive Experience on Humanitarian Crisis Recognition
+
+### Executive Summary
+Create a single-page HTML interactive experience that uses reverse psychology and dark satire to confront denial about the humanitarian crisis in Gaza. Through an incrementalist game mechanic that reveals the absurdity of arbitrary thresholds for recognizing genocide, players will confront their own biases and the dehumanization inherent in treating lives as statistics.
+
+### Core Concept
+The experience presents itself as a "Genocide Recognition Calculator" - a satirical tool that asks players to set their personal threshold for when mass casualties become "officially" concerning. As players interact with real casualty data from Tech For Palestine's APIs, the experience gradually reveals the absurdity and cruelty of waiting for "enough" deaths before acknowledging humanitarian catastrophe.
+
+### Technical Requirements
+
+#### Architecture
+- **Single HTML file** with embedded CSS and JavaScript
+- **No build tools, frameworks, or dev servers** - pure vanilla implementation
+- **All API calls client-side** using fetch()
+- **No exposed API keys** (Tech For Palestine's APIs are public)
+- **Responsive design** for mobile and desktop
+- **Fast initial load** - minimize external dependencies
+
+#### Security Requirements
+- No user data collection or storage
+- No cookies or localStorage for personal information
+- HTTPS-only deployment
+- Content Security Policy headers
+- No external scripts except for API calls
+
+### Game Mechanics & Flow
+
+#### 1. Opening Screen
+**Title**: "The Genocide Recognition Calculator™"
+**Subtitle**: "Finally, a scientific way to determine when enough is enough!"
+**Satirical disclaimer**: "This tool uses advanced algorithms to help you decide exactly how many deaths constitute a 'real' humanitarian crisis."
+
+#### 2. Threshold Setting Phase
+Players are asked to input their "recognition threshold" through increasingly absurd questions:
+- "How many children need to die before you'd call it genocide?" (slider: 0-50,000)
+- "What percentage of hospitals destroyed makes it 'systematic'?" (slider: 0-100%)
+- "How many journalists killed before it's 'targeting press'?" (slider: 0-500)
+
+Each slider shows comparative statistics below it (e.g., "That's more than the population of [small town]")
+
+#### 3. Reality Check Phase
+After setting thresholds, the experience reveals actual data from Tech For Palestine APIs:
+- Current death toll (with breakdown by age/gender)
+- Infrastructure destroyed
+- Comparison to player's thresholds
+
+The tone shifts from satirical to somber as real numbers appear with contextual information.
+
+#### 4. Incrementalist Revelation
+A timeline shows how the numbers have grown day by day, with satirical "milestone" markers:
+- "Day 15: Some people started paying attention"
+- "Day 100: Still debating definitions"
+- "Day 365: Waiting for more evidence"
+
+Players can scrub through time to see the accumulation of loss.
+
+#### 5. Reflection Phase
+Final screen drops all satire:
+- Shows total casualties with names when available
+- Links to humanitarian organizations
+- Simple message: "There is no threshold. Every life matters."
+- Call to action for humanitarian support
+
+### API Integration Requirements
+
+#### Data Sources (all from Tech For Palestine - https://data.techforpalestine.org/)
+
+1. **Summary Data API**
+   - Endpoint: `https://data.techforpalestine.org/api/v3/summary.json`
+   - Use for: Latest totals, age/gender breakdown
+   - Display: "Last updated: [date]" prominently
+
+2. **Daily Casualties - Gaza**
+   - Endpoint: `https://data.techforpalestine.org/api/v2/casualties_daily.json`
+   - Use for: Timeline visualization, daily progression
+
+3. **Daily Casualties - West Bank**
+   - Endpoint: `https://data.techforpalestine.org/api/v2/west_bank_daily.json`
+   - Use for: Comprehensive view including West Bank
+
+4. **Infrastructure Damaged**
+   - Endpoint: `https://data.techforpalestine.org/api/v3/infrastructure-damaged.json`
+   - Use for: Context about systematic destruction
+
+#### API Implementation
+```javascript
+// Cache API responses to minimize requests
+const apiCache = new Map();
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+async function fetchWithCache(url) {
+    const cached = apiCache.get(url);
+    if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+        return cached.data;
+    }
+    
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        apiCache.set(url, { data, timestamp: Date.now() });
+        return data;
+    } catch (error) {
+        console.error('API fetch failed:', error);
+        // Implement fallback to show cached or placeholder data
+    }
+}
+```
+
+### Visual Design Requirements
+
+#### Color Palette
+- Start with dark, satirical colors (blacks, deep reds)
+- Transition to somber, respectful tones (grays, muted blues)
+- End with hopeful accents (Palestinian flag colors used respectfully)
+
+#### Typography
+- Headers: Bold, attention-grabbing for satirical sections
+- Body text: Clear, readable, becoming more humanistic in tone
+- Data displays: Clean, non-sensationalized presentation
+
+#### Responsive Breakpoints
+- Mobile: 320px - 768px (single column, touch-optimized)
+- Tablet: 768px - 1024px (adjusted layouts)
+- Desktop: 1024px+ (full experience)
+
+### Content Guidelines
+
+#### Satirical Elements
+- Target the absurdity of denial, not the tragedy itself
+- Mock the bureaucratic coldness of "waiting for evidence"
+- Satirize those who demand arbitrary thresholds
+- Never mock victims or Palestinian culture
+
+#### Respectful Elements
+- Always display "Data provided by Tech For Palestine" with link
+- Include content warning at start
+- Provide resources for psychological support
+- End with constructive actions people can take
+
+### SEO & Metadata Requirements
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>How Many More? - An Interactive Reflection on Humanitarian Crisis</title>
+    <meta name="description" content="An interactive experience that challenges us to confront our thresholds for recognizing humanitarian catastrophe. When is enough, enough?">
+    <meta name="keywords" content="humanitarian crisis, gaza, palestine, genocide, awareness, interactive">
+    <meta name="author" content="How Many More">
+    <link rel="canonical" href="https://howmanymore.xyz/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="How Many More? - When Is Enough, Enough?">
+    <meta property="og:description" content="An interactive experience challenging our thresholds for recognizing humanitarian catastrophe.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://howmanymore.xyz/">
+    <meta property="og:image" content="https://howmanymore.xyz/og-image.png">
+    <meta property="og:image:alt" content="How Many More? Interactive Experience">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How Many More? - When Is Enough, Enough?">
+    <meta name="twitter:description" content="An interactive experience challenging our thresholds for recognizing humanitarian catastrophe.">
+    <meta name="twitter:image" content="https://howmanymore.xyz/og-image.png">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://data.techforpalestine.org;">
+</head>
+```
+
+### User Stories
+
+1. **As a genocide denialist**, I interact with the threshold calculator and am confronted with the absurdity of my arbitrary requirements for "proof," leading me to reflect on my biases.
+
+2. **As someone unaware of the scale**, I experience the incremental revelation of casualties and understand how large numbers can desensitize us to individual tragedies.
+
+3. **As a Palestinian or ally**, I see my pain acknowledged respectfully while the experience targets those who deny or minimize it.
+
+4. **As an activist**, I find shareable content that effectively communicates the urgency without being dismissed as "propaganda."
+
+### Test Cases
+
+#### Functional Tests
+1. **API Loading**: Verify all four APIs load and display data correctly
+2. **Fallback Handling**: Test behavior when APIs are unavailable
+3. **Interactive Elements**: Ensure all sliders and buttons work on touch/mouse
+4. **Data Updates**: Confirm "last updated" shows correct timestamp
+5. **Responsive Design**: Test on various screen sizes
+
+#### Content Tests
+1. **Tone Progression**: Verify satirical→somber→hopeful flow
+2. **Credit Display**: Ensure Tech For Palestine credited prominently
+3. **No Offensive Content**: Review all text for respectfulness
+4. **CTA Functionality**: Test all outbound links work correctly
+
+#### Performance Tests
+1. **Load Time**: Page loads in under 3 seconds on 3G
+2. **API Caching**: Verify cache prevents excessive API calls
+3. **Animation Performance**: Smooth transitions on low-end devices
+
+### Implementation Notes for Replit
+
+1. **Start with HTML structure** following the game flow phases
+2. **Implement API calls early** to ensure data availability
+3. **Build interactive elements progressively** - sliders first, then animations
+4. **Test on mobile throughout** development
+5. **Keep all code in single file** for simplicity
+6. **Use CSS animations** instead of JavaScript where possible for performance
+7. **Implement error states** for all API calls
+8. **Add content warning modal** that appears on first visit
+
+### Ethical Considerations
+
+- Never gamify actual deaths - the "game" mechanics are about challenging denial, not scoring points
+- Ensure Palestinian voices and experiences are centered, not exploited
+- Include resources for viewers who may be triggered
+- Make clear this is solidarity work, not speaking for Palestinians
+- Regular updates to ensure data accuracy and relevance
+
+### Success Metrics
+
+- Completion rate: How many users go through entire experience
+- Time spent: Average engagement time
+- Shares: Social media engagement (without tracking users)
+- Feedback: Qualitative responses about impact
+- Action taken: Click-through to humanitarian organizations
+
+### Final Deliverable
+
+A single `index.html` file containing:
+- Complete HTML structure
+- Embedded CSS with responsive design
+- Vanilla JavaScript for interactivity and API calls
+- All metadata for SEO and social sharing
+- Comments crediting Tech For Palestine
+- Deployment-ready for https://howmanymore.xyz/

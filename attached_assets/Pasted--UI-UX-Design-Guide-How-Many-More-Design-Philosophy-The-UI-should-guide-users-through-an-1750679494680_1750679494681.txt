@@ -1,0 +1,642 @@
+# UI/UX Design Guide: "How Many More?"
+
+## Design Philosophy
+The UI should guide users through an emotional journey: from dark satire → uncomfortable realization → somber reflection → constructive action. Every design element should support this narrative arc.
+
+## Visual Design System
+
+### Color Progression
+
+#### Phase 1: Satirical Calculator (Dark Comedy)
+```css
+/* Bureaucratic coldness with hints of absurdity */
+--bg-primary: #1a1a1a;      /* Deep black background */
+--bg-secondary: #2d2d2d;    /* Dark grey panels */
+--accent-satire: #ff3b3b;   /* Blood red for emphasis */
+--text-primary: #ffffff;     /* Stark white text */
+--text-secondary: #a0a0a0;  /* Grey for subtext */
+--slider-track: #404040;    /* Dark slider tracks */
+--slider-thumb: #ff3b3b;    /* Red slider handles */
+```
+
+#### Phase 2: Reality Check (Transition)
+```css
+/* Colors begin to shift, satire fades */
+--bg-transition: linear-gradient(180deg, #1a1a1a 0%, #2a2a3e 100%);
+--text-reality: #e8e8e8;
+--data-highlight: #ffd700;  /* Gold for real numbers */
+--warning-red: #dc143c;     /* Crimson for casualties */
+```
+
+#### Phase 3: Timeline (Somber Reality)
+```css
+/* Respectful, mournful tones */
+--bg-timeline: #1e1e2e;
+--timeline-line: #4a4a5e;
+--milestone-dot: #ffffff;
+--casualty-red: #8b0000;
+--date-text: #b0b0c0;
+```
+
+#### Phase 4: Memorial (Hope & Action)
+```css
+/* Palestinian flag colors used respectfully */
+--memorial-black: #000000;
+--memorial-white: #ffffff;
+--memorial-green: #007a3d;
+--memorial-red: #ce1126;
+--action-button: #007a3d;
+--action-hover: #005a2d;
+```
+
+### Typography System
+
+```css
+/* Font Stack */
+--font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Arial', sans-serif;
+--font-mono: 'Courier New', monospace;
+
+/* Satirical Phase Typography */
+.satirical-heading {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    /* Slightly tilted for absurdist effect */
+    transform: rotate(-1deg);
+}
+
+.bureaucratic-text {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+}
+
+/* Data Display Typography */
+.casualty-number {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300;
+    font-variant-numeric: tabular-nums;
+    /* Removes any playful styling */
+    transform: none;
+    letter-spacing: -0.03em;
+}
+
+/* Memorial Phase Typography */
+.memorial-text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    font-weight: 400;
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto;
+}
+```
+
+## Layout & Spacing
+
+### Container System
+```css
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(1rem, 5vw, 3rem);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.content-section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+```
+
+### Grid System for Sliders
+```css
+.threshold-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+@media (max-width: 768px) {
+    .threshold-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+```
+
+## Component Design
+
+### 1. Satirical Sliders
+```css
+.threshold-slider-container {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.threshold-slider-container:hover {
+    border-color: var(--accent-satire);
+}
+
+.slider-label {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.slider-input {
+    width: 100%;
+    height: 40px;
+    -webkit-appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.slider-input::-webkit-slider-track {
+    width: 100%;
+    height: 8px;
+    background: var(--slider-track);
+    border-radius: 4px;
+}
+
+.slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--slider-thumb);
+    border-radius: 50%;
+    cursor: grab;
+    transition: transform 0.2s ease;
+}
+
+.slider-input::-webkit-slider-thumb:active {
+    cursor: grabbing;
+    transform: scale(1.2);
+}
+
+.slider-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent-satire);
+    margin: 1rem 0;
+}
+
+.comparison-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    /* Updates dynamically based on slider value */
+}
+```
+
+### 2. Reality Check Cards
+```css
+.reality-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 1rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.reality-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--warning-red);
+}
+
+.actual-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--data-highlight);
+    margin: 1rem 0;
+    /* Subtle scale animation on reveal */
+    animation: numberReveal 0.6s ease-out;
+}
+
+@keyframes numberReveal {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+```
+
+### 3. Timeline Component
+```css
+.timeline-container {
+    position: relative;
+    padding: 3rem 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--timeline-line);
+    transform: translateX(-50%);
+}
+
+.timeline-event {
+    position: relative;
+    padding: 1rem 2rem;
+    margin: 2rem 0;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.4s ease;
+}
+
+.timeline-event.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timeline-event:nth-child(even) {
+    text-align: right;
+    transform: translateX(20px);
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--milestone-dot);
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+/* Mobile Timeline */
+@media (max-width: 768px) {
+    .timeline-line {
+        left: 20px;
+    }
+    
+    .timeline-event,
+    .timeline-event:nth-child(even) {
+        text-align: left;
+        padding-left: 50px;
+        transform: translateX(0);
+    }
+    
+    .timeline-dot {
+        left: 20px;
+    }
+}
+```
+
+### 4. Call-to-Action Buttons
+```css
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--action-button);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.3s ease;
+}
+
+.cta-button:hover::before {
+    left: 0;
+}
+
+.cta-button:hover {
+    background: var(--action-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+```
+
+## Interaction Patterns
+
+### 1. Progressive Disclosure
+```javascript
+// Reveal sections as user progresses
+const revealSection = (sectionId, delay = 0) => {
+    setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        section.classList.add('active');
+        
+        // Trigger haptic feedback on mobile
+        if ('vibrate' in navigator) {
+            navigator.vibrate(10);
+        }
+    }, delay);
+};
+```
+
+### 2. Slider Interactions
+```javascript
+// Dynamic comparison text based on slider value
+slider.addEventListener('input', (e) => {
+    const value = parseInt(e.target.value);
+    const comparison = getComparison(value);
+    
+    // Smooth number transition
+    animateNumber(displayElement, currentValue, value, 300);
+    
+    // Update comparison with fade effect
+    comparisonElement.style.opacity = '0';
+    setTimeout(() => {
+        comparisonElement.textContent = comparison;
+        comparisonElement.style.opacity = '1';
+    }, 150);
+});
+```
+
+### 3. Scroll-Based Reveals
+```javascript
+// Reveal timeline events on scroll
+const observerOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -10% 0px'
+};
+
+const timelineObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+```
+
+## Animation Guidelines
+
+### Timing Functions
+```css
+/* Easing functions for different emotional states */
+--ease-satirical: cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bouncy, slightly absurd */
+--ease-reality: cubic-bezier(0.4, 0, 0.2, 1);             /* Smooth, serious */
+--ease-memorial: cubic-bezier(0.215, 0.61, 0.355, 1);     /* Gentle, respectful */
+```
+
+### Loading States
+```css
+.data-loading {
+    position: relative;
+    min-height: 200px;
+}
+
+.data-loading::after {
+    content: 'Loading real-time data...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Subtle pulse for loading */
+@keyframes loadingPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.data-loading::after {
+    animation: loadingPulse 1.5s ease-in-out infinite;
+}
+```
+
+## Accessibility Requirements
+
+### Focus States
+```css
+/* High contrast focus indicators */
+*:focus {
+    outline: 3px solid var(--data-highlight);
+    outline-offset: 2px;
+}
+
+/* Skip to content link */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--action-button);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+}
+
+.skip-to-content:focus {
+    top: 0;
+}
+```
+
+### Screen Reader Support
+```html
+<!-- Announce data updates -->
+<div aria-live="polite" aria-atomic="true" class="sr-only" id="data-announcer">
+    <!-- Updated via JavaScript when data loads -->
+</div>
+
+<!-- Semantic structure -->
+<main role="main" aria-label="How Many More Interactive Experience">
+    <section aria-label="Threshold Calculator" role="region">
+        <!-- Satirical content -->
+    </section>
+    
+    <section aria-label="Reality Check" role="region">
+        <!-- Real data -->
+    </section>
+</main>
+```
+
+### Reduced Motion
+```css
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    /* Keep essential feedback */
+    .data-loading::after {
+        animation: none;
+        opacity: 1;
+    }
+}
+```
+
+## Mobile-Specific Considerations
+
+### Touch Targets
+```css
+/* Minimum 44x44px touch targets */
+.touchable {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Larger slider thumbs on mobile */
+@media (pointer: coarse) {
+    .slider-input::-webkit-slider-thumb {
+        width: 32px;
+        height: 32px;
+    }
+}
+```
+
+### Mobile Navigation
+```css
+.mobile-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-nav {
+        display: flex;
+        gap: 1rem;
+    }
+}
+```
+
+## Performance Optimizations
+
+### CSS Containment
+```css
+.timeline-container {
+    contain: layout style;
+}
+
+.reality-card {
+    contain: layout;
+    will-change: transform;
+}
+```
+
+### Image Loading
+```html
+<!-- Lazy load memorial images -->
+<img 
+    src="placeholder.svg" 
+    data-src="memorial-image.jpg" 
+    loading="lazy"
+    alt="Memorial for victims"
+    class="memorial-image"
+/>
+```
+
+## Error States
+
+### API Failure UI
+```css
+.error-message {
+    background: rgba(220, 20, 60, 0.1);
+    border: 1px solid var(--warning-red);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.error-message p {
+    color: var(--text-primary);
+    margin: 0.5rem 0;
+}
+
+.retry-button {
+    background: transparent;
+    border: 1px solid var(--text-primary);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.retry-button:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+}
+```
+
+## Testing Checklist
+
+### Visual Hierarchy
+- [ ] Clear progression from satire to memorial
+- [ ] Important data stands out appropriately
+- [ ] CTAs are visually prominent
+
+### Interaction Feedback
+- [ ] All interactive elements have hover states
+- [ ] Loading states are clear
+- [ ] Transitions are smooth
+
+### Accessibility
+- [ ] Keyboard navigation works throughout
+- [ ] Screen reader announcements are appropriate
+- [ ] Color contrast meets WCAG AA standards
+- [ ] Focus indicators are visible
+
+### Responsive Design
+- [ ] Tested on screens 320px to 2560px wide
+- [ ] Touch targets are appropriately sized
+- [ ] Text remains readable at all sizes
+
+### Performance
+- [ ] Animations run at 60fps
+- [ ] No layout shifts during loading
+- [ ] Images are optimized
