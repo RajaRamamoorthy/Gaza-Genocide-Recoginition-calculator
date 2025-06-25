@@ -27,7 +27,7 @@
     
     <!-- Additional Meta Tags -->
     <meta name="robots" content="index, follow">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://data.techforpalestine.org https://www.google-analytics.com https://analytics.google.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://data.techforpalestine.org https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://region1.analytics.google.com;">
     
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VEXKV16ST6"></script>
@@ -1061,16 +1061,16 @@
 
                 <h3 style="margin: 3rem 0 1rem 0; font-size: 1.75rem; color: #f8fafc;">Take Action</h3>
                 <div class="cta-container">
-                    <a href="https://www.unrwa.org/donate" target="_blank" rel="noopener" class="cta-button">
+                    <a href="https://www.unrwa.org/donate" target="_blank" rel="noopener" class="cta-button" onclick="trackEvent('cta_clicked', 'conversion', 'unrwa_donate'); trackEvent('donation_intent', 'action', 'unrwa');">
                         Support UNRWA
                     </a>
-                    <a href="https://pcrf.net/" target="_blank" rel="noopener" class="cta-button">
+                    <a href="https://pcrf.net/" target="_blank" rel="noopener" class="cta-button" onclick="trackEvent('cta_clicked', 'conversion', 'pcrf_donate'); trackEvent('donation_intent', 'action', 'pcrf');">
                         Palestine Children's Relief Fund
                     </a>
-                    <a href="https://www.map.org.uk/" target="_blank" rel="noopener" class="cta-button">
+                    <a href="https://www.map.org.uk/" target="_blank" rel="noopener" class="cta-button" onclick="trackEvent('cta_clicked', 'conversion', 'map_donate'); trackEvent('donation_intent', 'action', 'map');">
                         Medical Aid for Palestinians
                     </a>
-                    <a href="https://islamichelp.org.uk/appeals/palestine-appeal/" target="_blank" rel="noopener" class="cta-button">
+                    <a href="https://islamichelp.org.uk/appeals/palestine-appeal/" target="_blank" rel="noopener" class="cta-button" onclick="trackEvent('cta_clicked', 'conversion', 'islamic_help_donate'); trackEvent('donation_intent', 'action', 'islamic_help');">
                         Islamic Help Palestine Appeal
                     </a>
                 </div>
@@ -1078,8 +1078,8 @@
                 <div class="memorial-text" style="margin-top: 3rem; font-size: 0.875rem; opacity: 0.8;">
                     <p>If you need emotional support after viewing this content:</p>
                     <p>
-                        <a href="https://www.crisistext.org" target="_blank" rel="noopener" style="color: #94a3b8; font-weight: 500;">Crisis Text Line</a> | 
-                        <a href="https://suicidepreventionlifeline.org" target="_blank" rel="noopener" style="color: #94a3b8; font-weight: 500;">988 Suicide & Crisis Lifeline</a>
+                        <a href="https://www.crisistext.org" target="_blank" rel="noopener" style="color: #94a3b8; font-weight: 500;" onclick="trackEvent('support_clicked', 'user_care', 'crisis_text_line');">Crisis Text Line</a> | 
+                        <a href="https://suicidepreventionlifeline.org" target="_blank" rel="noopener" style="color: #94a3b8; font-weight: 500;" onclick="trackEvent('support_clicked', 'user_care', '988_lifeline');">988 Suicide & Crisis Lifeline</a>
                     </p>
                 </div>
             </div>
@@ -1178,6 +1178,9 @@
             const value = parseInt(element.value);
             userThresholds[type] = value;
             
+            // Track threshold changes
+            trackUserThreshold(type, value);
+            
             if (type === 'hospitals') {
                 valueElement.textContent = value + '%';
             } else {
@@ -1221,7 +1224,10 @@
 
         // Load API data
         async function loadApiData() {
+            const startTime = Date.now();
             try {
+                trackEvent('api_data_loading_started', 'data_source', 'tech_for_palestine');
+                
                 // Load summary data
                 const summaryData = await fetchWithCache('https://data.techforpalestine.org/api/v3/summary.json');
                 currentData.summary = summaryData;
@@ -1234,9 +1240,13 @@
                 const infraData = await fetchWithCache('https://data.techforpalestine.org/api/v3/infrastructure-damaged.json');
                 currentData.infrastructure = infraData;
 
+                const loadTime = Date.now() - startTime;
+                trackEvent('api_data_loaded_successfully', 'data_source', 'tech_for_palestine', loadTime);
+                
                 return true;
             } catch (error) {
                 console.error('Failed to load API data:', error);
+                trackEvent('api_data_loading_failed', 'data_source', 'tech_for_palestine_error');
                 return false;
             }
         }
@@ -1387,6 +1397,21 @@
             realityData.classList.remove('data-loading');
             realityData.innerHTML = realityContent;
             
+            // Track reality data viewing
+            trackEvent('reality_data_viewed', 'user_engagement', 'data_comparison', {
+                children_excess: childrenExcess,
+                people_excess: peopleExcess,
+                hospital_excess: hospitalExcess
+            });
+            
+            // Track shock value metrics for insights
+            const avgExcess = Math.round((childrenExcess + peopleExcess + hospitalExcess) / 3);
+            if (avgExcess > 200) {
+                trackEvent('high_reality_shock', 'user_impact', 'extreme_excess', avgExcess);
+            } else if (avgExcess > 100) {
+                trackEvent('moderate_reality_shock', 'user_impact', 'significant_excess', avgExcess);
+            }
+            
             // Ensure equal heights for comparison sides
             setTimeout(() => {
                 const sides = document.querySelectorAll('.comparison-side');
@@ -1473,14 +1498,54 @@
             }, 1000);
         }
 
+        // Track scroll behavior and engagement
+        let scrollTracked = false;
+        let memorialReached = false;
+        let timeOnPage = Date.now();
+
+        function trackUserEngagement() {
+            // Track scroll depth
+            window.addEventListener('scroll', () => {
+                const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+                
+                if (scrollPercent > 50 && !scrollTracked) {
+                    trackEvent('scroll_engagement', 'user_behavior', 'scrolled_50_percent', scrollPercent);
+                    scrollTracked = true;
+                }
+                
+                // Track if user reaches memorial section
+                const memorialSection = document.getElementById('memorial-section');
+                if (memorialSection && !memorialReached) {
+                    const memorialTop = memorialSection.offsetTop;
+                    if (window.scrollY + window.innerHeight >= memorialTop) {
+                        trackEvent('memorial_section_reached', 'user_flow', 'final_section_viewed');
+                        memorialReached = true;
+                    }
+                }
+            });
+
+            // Track time spent on page
+            window.addEventListener('beforeunload', () => {
+                const timeSpent = Math.round((Date.now() - timeOnPage) / 1000);
+                trackEvent('session_duration', 'user_behavior', 'time_on_page', timeSpent);
+            });
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            initializeSliders();
+            // Track page load and user session start
+            trackEvent('page_loaded', 'user_flow', 'how_many_more_experience');
+            trackEvent('session_started', 'user_behavior', 'interactive_experience');
             
-            // Check if user has seen warning before (could use sessionStorage)
+            initializeSliders();
+            trackUserEngagement();
+            
+            // Check if user has seen warning before
             const hasSeenWarning = sessionStorage.getItem('hasSeenWarning');
             if (hasSeenWarning) {
                 dismissWarning();
+            } else {
+                trackEvent('content_warning_shown', 'user_flow', 'warning_modal_displayed');
             }
         });
 
