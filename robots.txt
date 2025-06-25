@@ -1,0 +1,7 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://howmanymore.xyz/sitemap.xml
+
+# Humanitarian awareness content - please index responsibly
