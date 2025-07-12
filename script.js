@@ -1,6 +1,6 @@
 // API Cache for minimizing requests
 const apiCache = new Map();
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+const CACHE_DURATION = 0; // Disable caching for debugging
 
 // User thresholds
 let userThresholds = {
@@ -216,9 +216,15 @@ async function revealReality() {
     // Load data
     const dataLoaded = await loadApiData();
     
+    console.log('Data loaded:', dataLoaded); // Debug log
+    console.log('currentData.summary exists:', !!currentData.summary); // Debug log
+    console.log('currentData.summary content:', currentData.summary); // Debug log
+    
     if (dataLoaded && currentData.summary) {
+        console.log('Calling displayRealityData()'); // Debug log
         displayRealityData();
     } else {
+        console.log('Calling displayErrorState()'); // Debug log
         displayErrorState();
     }
 
