@@ -1,0 +1,35 @@
+{
+  "name": "How Many More? - Genocide Recognition Calculator",
+  "short_name": "How Many More?",
+  "description": "An interactive experience challenging our thresholds for recognizing humanitarian catastrophe",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#dc2626",
+  "orientation": "portrait-primary",
+  "categories": ["education", "social", "news"],
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%23dc2626'/><text x='96' y='96' text-anchor='middle' dominant-baseline='central' font-size='120' fill='white'>📊</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%23dc2626'/><text x='256' y='256' text-anchor='middle' dominant-baseline='central' font-size='320' fill='white'>📊</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'><rect width='1200' height='630' fill='%23f5f5f5'/><text x='600' y='200' text-anchor='middle' font-size='48' fill='%23dc2626'>The Genocide Recognition Calculator</text><text x='600' y='280' text-anchor='middle' font-size='24' fill='%23666'>An interactive experience challenging thresholds</text><rect x='200' y='350' width='800' height='200' fill='%23fff' stroke='%23e5e5e5' rx='12'/><text x='600' y='420' text-anchor='middle' font-size='20' fill='%23333'>Set your recognition thresholds</text><text x='600' y='460' text-anchor='middle' font-size='16' fill='%23666'>Interactive sliders for humanitarian crisis awareness</text></svg>",
+      "sizes": "1200x630",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "How Many More Calculator Interface"
+    }
+  ]
+}
