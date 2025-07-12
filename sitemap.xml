@@ -8,7 +8,7 @@
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
     <url>
         <loc>https://howmanymore.xyz/</loc>
-        <lastmod>2025-01-12</lastmod>
+        <lastmod>2025-07-12</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
         <mobile:mobile/>
@@ -16,21 +16,21 @@
     <!-- Additional paths for deep indexing -->
     <url>
         <loc>https://howmanymore.xyz/#threshold-section</loc>
-        <lastmod>2025-01-12</lastmod>
+        <lastmod>2025-07-12</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
         <mobile:mobile/>
     </url>
     <url>
         <loc>https://howmanymore.xyz/#reality-section</loc>
-        <lastmod>2025-01-12</lastmod>
+        <lastmod>2025-07-12</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
         <mobile:mobile/>
     </url>
     <url>
         <loc>https://howmanymore.xyz/#memorial-section</loc>
-        <lastmod>2025-01-12</lastmod>
+        <lastmod>2025-07-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <mobile:mobile/>

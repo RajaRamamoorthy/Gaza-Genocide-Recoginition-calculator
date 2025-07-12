@@ -1,8 +1,8 @@
-# How Many More? - Interactive Humanitarian Crisis Experience
+# The Genocide Recognition Calculator - Interactive Humanitarian Crisis Experience
 
 ## Overview
 
-"How Many More?" is a single-page interactive web experience that uses reverse psychology and dark satire to confront denial about humanitarian crises. The application guides users through an emotional journey from satirical engagement to somber reflection, ultimately challenging their thresholds for recognizing humanitarian catastrophe.
+The "Genocide Recognition Calculator" is a single-page interactive web experience that uses reverse psychology and dark satire to confront denial about humanitarian crises. The application guides users through an emotional journey from satirical engagement to somber reflection, ultimately challenging their thresholds for recognizing humanitarian catastrophe.
 
 The project is designed as a static website using pure HTML, CSS, and JavaScript without any frameworks or build tools, making it simple to deploy and maintain while ensuring fast loading times.
 
@@ -103,6 +103,21 @@ The project is designed as a static website using pure HTML, CSS, and JavaScript
 - **Comprehensive crawler permissions** in robots.txt
 
 ## Changelog
+- **July 12, 2025: Major SEO & Metadata Overhaul**
+  - Removed redundant "How Many More" mentions across all meta tags
+  - Updated all SEO meta tags with focused keywords and better descriptions
+  - Added canonical URL tag for proper SEO indexing
+  - Fixed missing closing tag on Permissions-Policy meta
+  - Added proper Open Graph and Twitter Card image URLs
+  - Updated JSON-LD schema with URL property and better structure
+  - Updated sitemap.xml with current date (2025-07-12)
+  - Added preload for critical CSS resources
+  - Enhanced robots.txt with clearer crawler permissions
+  - Updated manifest.json to match new branding
+  - Updated README.md to reflect new SEO structure
+  - Added additional security headers (X-Frame-Options, X-Content-Type-Options)
+  - Optimized meta descriptions for ideal length (150-160 characters)
+  - Updated Google Analytics page title to match new branding
 - **July 12, 2025: Complete API Debugging & CORS Fix**
   - Fixed CORS policy blocking by implementing api.allorigins.win proxy
   - Updated Content Security Policy to allow proxy domain connections

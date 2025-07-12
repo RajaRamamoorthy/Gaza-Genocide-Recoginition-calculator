@@ -47,4 +47,6 @@ Allow: /
 Sitemap: https://howmanymore.xyz/sitemap.xml
 
 # Humanitarian awareness content - comprehensive indexing encouraged
-# This content serves public interest and educational purposes
+# This educational tool serves public interest and crisis awareness
+# All major search engines and crawlers are welcome to index this content
+# No crawl restrictions - full access granted for educational purposes

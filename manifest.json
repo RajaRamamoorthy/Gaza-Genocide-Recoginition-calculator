@@ -1,7 +1,7 @@
 {
-  "name": "How Many More? - Genocide Recognition Calculator",
-  "short_name": "How Many More?",
-  "description": "An interactive experience challenging our thresholds for recognizing humanitarian catastrophe",
+  "name": "Genocide Recognition Calculator",
+  "short_name": "Genocide Calculator",
+  "description": "Interactive tool that challenges your thresholds for recognizing humanitarian catastrophe with real-time crisis data",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f5f5f5",

@@ -1,11 +1,11 @@
 
-# How Many More? - An Interactive Humanitarian Experience
+# The Genocide Recognition Calculator
 
-An interactive web experience that challenges users to confront their thresholds for recognizing humanitarian catastrophe through a satirical calculator that reveals the stark reality of ongoing crises.
+An interactive web application that challenges users to confront their thresholds for recognizing humanitarian catastrophe through a provocative calculator interface that reveals the stark reality of ongoing crises.
 
 ## 🎯 Project Overview
 
-"How Many More?" is a powerful interactive experience designed to challenge our collective desensitization to humanitarian crises. Through a unique four-phase narrative journey, users are guided from satirical engagement to sobering reality, ultimately leading to constructive action.
+The Genocide Recognition Calculator is a powerful educational tool designed to challenge our collective desensitization to humanitarian crises. Through a unique four-phase narrative journey, users are guided from satirical engagement to sobering reality, ultimately leading to constructive action.
 
 ### Key Features
 
@@ -18,7 +18,7 @@ An interactive web experience that challenges users to confront their thresholds
 
 ## 🚀 Live Demo
 
-Visit the live experience: [How Many More?](https://howmanymore.xyz)
+Visit the live experience: [Genocide Recognition Calculator](https://howmanymore.xyz)
 
 ## 📱 Screenshots
 
