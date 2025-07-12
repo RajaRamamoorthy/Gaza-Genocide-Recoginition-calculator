@@ -528,6 +528,57 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Set up exit to support button
+    const exitBtn = document.getElementById('exit-to-support-btn');
+    if (exitBtn) {
+        exitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'https://www.crisistext.org';
+        });
+    }
+    
+    // Set up calculate button
+    const calculateBtn = document.getElementById('calculate-btn');
+    if (calculateBtn) {
+        calculateBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            revealReality();
+        });
+    }
+    
+    // Set up CTA links with tracking
+    const ctaLinks = [
+        { id: 'unrwa-link', action: 'unrwa_donate', category: 'unrwa' },
+        { id: 'pcrf-link', action: 'pcrf_donate', category: 'pcrf' },
+        { id: 'map-link', action: 'map_donate', category: 'map' },
+        { id: 'islamic-help-link', action: 'islamic_help_donate', category: 'islamic_help' }
+    ];
+    
+    ctaLinks.forEach(link => {
+        const element = document.getElementById(link.id);
+        if (element) {
+            element.addEventListener('click', function() {
+                trackEvent('cta_clicked', 'conversion', link.action);
+                trackEvent('donation_intent', 'action', link.category);
+            });
+        }
+    });
+    
+    // Set up support links
+    const crisisTextLink = document.getElementById('crisis-text-link');
+    if (crisisTextLink) {
+        crisisTextLink.addEventListener('click', function() {
+            trackEvent('support_clicked', 'user_care', 'crisis_text_line');
+        });
+    }
+    
+    const lifelineLink = document.getElementById('lifeline-link');
+    if (lifelineLink) {
+        lifelineLink.addEventListener('click', function() {
+            trackEvent('support_clicked', 'user_care', '988_lifeline');
+        });
+    }
+    
     // Check if user has seen warning before
     let hasSeenWarning = false;
     try {

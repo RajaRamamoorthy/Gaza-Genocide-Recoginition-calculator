@@ -644,6 +644,50 @@ h3 {
     visibility: hidden !important;
 }
 
+/* Threshold section styling */
+.threshold-title {
+    text-align: center;
+    margin: 2rem 0;
+    font-size: 1.75rem;
+}
+
+.threshold-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.threshold-description {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+/* Memorial section styling */
+.memorial-main-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    color: #f8fafc;
+}
+
+.memorial-action-title {
+    margin: 3rem 0 1rem 0;
+    font-size: 1.75rem;
+    color: #f8fafc;
+}
+
+.memorial-support-text {
+    margin-top: 3rem;
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+.support-link {
+    color: #94a3b8;
+    font-weight: 500;
+}
+
 /* Section Transitions */
 .section-transition {
     position: relative;

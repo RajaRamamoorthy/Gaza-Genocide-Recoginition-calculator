@@ -135,7 +135,7 @@
             <p>The experience aims to promote awareness and humanitarian action, but may be disturbing to some viewers.</p>
             <p>Resources for emotional support will be provided at the end.</p>
             <button class="warning-button" id="dismiss-warning-btn">I Understand, Continue</button>
-            <button class="warning-button" onclick="window.location.href='https://www.crisistext.org'">Exit to Crisis Support</button>
+            <button class="warning-button" id="exit-to-support-btn">Exit to Crisis Support</button>
         </div>
     </div>
 
@@ -152,13 +152,13 @@
 
         <!-- Threshold Setting Phase -->
         <section aria-label="Threshold Settings" role="region" class="content-section" id="threshold-section">
-            <h2 style="text-align: center; margin: 2rem 0; font-size: 1.75rem;">Set Your Recognition Thresholds</h2>
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Use the sliders below to define exactly when you'd consider a situation worthy of international concern:</p>
+            <h2 class="threshold-title">Set Your Recognition Thresholds</h2>
+            <p class="threshold-subtitle">Use the sliders below to define exactly when you'd consider a situation worthy of international concern:</p>
             
             <div class="threshold-grid">
                 <div class="threshold-slider-container">
                     <label for="children-slider" class="slider-label">Children Deaths</label>
-                    <p style="font-size: 0.875rem; margin-bottom: 1rem; color: var(--text-secondary);">How many children need to die before you'd call it systematic targeting?</p>
+                    <p class="threshold-description">How many children need to die before you'd call it systematic targeting?</p>
                     <input type="range" id="children-slider" class="slider-input" min="0" max="20000" value="1000" step="100">
                     <div class="slider-value" id="children-value">1,000</div>
                     <div class="comparison-text" id="children-comparison">That's an entire elementary school classroom</div>
@@ -166,7 +166,7 @@
 
                 <div class="threshold-slider-container">
                     <label for="hospitals-slider" class="slider-label">Hospital Destruction</label>
-                    <p style="font-size: 0.875rem; margin-bottom: 1rem; color: var(--text-secondary);">What percentage of hospitals destroyed makes it "systematic infrastructure targeting"?</p>
+                    <p class="threshold-description">What percentage of hospitals destroyed makes it "systematic infrastructure targeting"?</p>
                     <input type="range" id="hospitals-slider" class="slider-input" min="0" max="100" value="50" step="5">
                     <div class="slider-value" id="hospitals-value">50%</div>
                     <div class="comparison-text" id="hospitals-comparison">Half the medical system would collapse</div>
@@ -174,14 +174,14 @@
 
                 <div class="threshold-slider-container">
                     <label for="people-slider" class="slider-label">People Deaths</label>
-                    <p style="font-size: 0.875rem; margin-bottom: 1rem; color: var(--text-secondary);">How many people need to die before it's concerning?</p>
+                    <p class="threshold-description">How many people need to die before it's concerning?</p>
                     <input type="range" id="people-slider" class="slider-input" min="0" max="60000" value="10000" step="500">
                     <div class="slider-value" id="people-value">10,000</div>
                     <div class="comparison-text" id="people-comparison">That's the population of a small town</div>
                 </div>
             </div>
 
-            <button class="calculate-button" onclick="revealReality()">
+            <button class="calculate-button" id="calculate-btn">
                 Calculate My Recognition Threshold
             </button>
         </section>
@@ -212,7 +212,7 @@
         <!-- Phase 4: Memorial -->
         <section aria-label="Memorial and Call to Action" role="region" class="content-section memorial-section" id="memorial-section">
             <div class="memorial-content">
-                <h2 style="font-size: 2.5rem; margin-bottom: 2rem; font-weight: 300; color: #f8fafc;">
+                <h2 class="memorial-main-title">
                     There is no threshold.
                 </h2>
                 
@@ -228,27 +228,27 @@
                     <p>Recognition should not require reaching a threshold. Action should not wait for perfect evidence. Humanity should not be conditional.</p>
                 </div>
 
-                <h3 style="margin: 3rem 0 1rem 0; font-size: 1.75rem; color: #f8fafc;">Take Action</h3>
+                <h3 class="memorial-action-title">Take Action</h3>
                 <div class="cta-container">
-                    <a href="https://www.unrwa.org/donate" target="_blank" rel="noopener" class="cta-button" onclick="trackEvent('cta_clicked', 'conversion', 'unrwa_donate'); trackEvent('donation_intent', 'action', 'unrwa');">
+                    <a href="https://www.unrwa.org/donate" target="_blank" rel="noopener" class="cta-button" id="unrwa-link">
                         Support UNRWA
                     </a>
-                    <a href="https://pcrf.net/" target="_blank" rel="noopener" class="cta-button" onclick="trackEvent('cta_clicked', 'conversion', 'pcrf_donate'); trackEvent('donation_intent', 'action', 'pcrf');">
+                    <a href="https://pcrf.net/" target="_blank" rel="noopener" class="cta-button" id="pcrf-link">
                         Palestine Children's Relief Fund
                     </a>
-                    <a href="https://www.map.org.uk/" target="_blank" rel="noopener" class="cta-button" onclick="trackEvent('cta_clicked', 'conversion', 'map_donate'); trackEvent('donation_intent', 'action', 'map');">
+                    <a href="https://www.map.org.uk/" target="_blank" rel="noopener" class="cta-button" id="map-link">
                         Medical Aid for Palestinians
                     </a>
-                    <a href="https://islamichelp.org.uk/appeals/palestine-appeal/" target="_blank" rel="noopener" class="cta-button" onclick="trackEvent('cta_clicked', 'conversion', 'islamic_help_donate'); trackEvent('donation_intent', 'action', 'islamic_help');">
+                    <a href="https://islamichelp.org.uk/appeals/palestine-appeal/" target="_blank" rel="noopener" class="cta-button" id="islamic-help-link">
                         Islamic Help Palestine Appeal
                     </a>
                 </div>
 
-                <div class="memorial-text" style="margin-top: 3rem; font-size: 0.875rem; opacity: 0.8;">
+                <div class="memorial-text memorial-support-text">
                     <p>If you need emotional support after viewing this content:</p>
                     <p>
-                        <a href="https://www.crisistext.org" target="_blank" rel="noopener" style="color: #94a3b8; font-weight: 500;" onclick="trackEvent('support_clicked', 'user_care', 'crisis_text_line');">Crisis Text Line</a> | 
-                        <a href="https://suicidepreventionlifeline.org" target="_blank" rel="noopener" style="color: #94a3b8; font-weight: 500;" onclick="trackEvent('support_clicked', 'user_care', '988_lifeline');">988 Suicide & Crisis Lifeline</a>
+                        <a href="https://www.crisistext.org" target="_blank" rel="noopener" class="support-link" id="crisis-text-link">Crisis Text Line</a> | 
+                        <a href="https://suicidepreventionlifeline.org" target="_blank" rel="noopener" class="support-link" id="lifeline-link">988 Suicide & Crisis Lifeline</a>
                     </p>
                 </div>
             </div>
