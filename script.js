@@ -471,9 +471,20 @@ function dismissWarning() {
     console.log('Warning element found:', !!warningElement); // Debug log
     
     if (warningElement) {
-        // Remove the element completely instead of just hiding
-        warningElement.remove();
-        console.log('Warning modal removed'); // Debug log
+        // Try multiple methods to ensure the modal is hidden
+        warningElement.style.display = 'none';
+        warningElement.style.visibility = 'hidden';
+        warningElement.style.opacity = '0';
+        warningElement.style.zIndex = '-1';
+        console.log('Warning modal hidden with multiple methods'); // Debug log
+        console.log('Final styles:', {
+            display: warningElement.style.display,
+            visibility: warningElement.style.visibility,
+            opacity: warningElement.style.opacity,
+            zIndex: warningElement.style.zIndex
+        });
+    } else {
+        console.error('Warning element not found!');
     }
     
     // Activate threshold section immediately

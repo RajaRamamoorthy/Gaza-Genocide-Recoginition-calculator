@@ -638,6 +638,12 @@ h3 {
     background: var(--action-hover);
 }
 
+/* Hidden class for modal */
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
 /* Section Transitions */
 .section-transition {
     position: relative;
