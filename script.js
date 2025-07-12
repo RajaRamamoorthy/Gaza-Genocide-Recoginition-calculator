@@ -327,7 +327,7 @@ function displayRealityData() {
                         <div class="excess-indicator">${childrenExcess}% above</div>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="--progress-width: ${Math.min(childrenExcess, 100)}%;"></div>
+                        <div class="progress-fill" data-progress="${Math.min(childrenExcess, 100)}"></div>
                     </div>
                     <div class="impact-text">That's ${Math.round(childrenKilled / 260)} children per day</div>
                 </div>
@@ -339,7 +339,7 @@ function displayRealityData() {
                         <div class="excess-indicator">${peopleExcess}% above</div>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="--progress-width: ${Math.min(peopleExcess, 100)}%;"></div>
+                        <div class="progress-fill" data-progress="${Math.min(peopleExcess, 100)}"></div>
                     </div>
                     <div class="impact-text">Including ${formatNumber(childrenKilled)} children and ${formatNumber(womenKilled)} women</div>
                 </div>
@@ -351,7 +351,7 @@ function displayRealityData() {
                         <div class="excess-indicator">${Math.round((hospitalExcess / userThresholds.hospitals) * 100)}% above</div>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="--progress-width: ${Math.min(hospitalExcess, 100)}%;"></div>
+                        <div class="progress-fill" data-progress="${Math.min(hospitalExcess, 100)}"></div>
                     </div>
                     <div class="impact-text">Medical system in complete collapse</div>
                 </div>
@@ -361,6 +361,17 @@ function displayRealityData() {
 
     realityData.classList.remove('data-loading');
     realityData.innerHTML = realityContent;
+    
+    // Apply progress bar widths after content is added to DOM
+    setTimeout(() => {
+        const progressFills = realityData.querySelectorAll('.progress-fill');
+        progressFills.forEach((fill) => {
+            const progress = fill.getAttribute('data-progress');
+            if (progress) {
+                fill.style.width = `${progress}%`;
+            }
+        });
+    }, 50);
     
     // Track reality data viewing
     trackEvent('reality_data_viewed', 'user_engagement', 'data_comparison', {
@@ -398,7 +409,7 @@ function generateDateRangeDisplay() {
         <div class="date-range-display">
             <h3>Since October 7, 2023</h3>
             <p>${formatNumber(daysSince)} days of ongoing crisis</p>
-            <p style="margin-top: 1rem; color: var(--text-secondary);">
+            <p class="date-range-message">
                 Every day, the numbers grow. Every day, families are shattered.
                 Every day, the world continues to debate thresholds.
             </p>

@@ -794,3 +794,9 @@ h3 {
         --data-highlight: #ffff00;
     }
 }
+
+/* Date range message styling */
+.date-range-message {
+    margin-top: 1rem;
+    color: var(--text-secondary);
+}
