@@ -162,16 +162,16 @@ async function loadApiData() {
     try {
         trackEvent('api_data_loading_started', 'data_source', 'tech_for_palestine');
         
-        // Load summary data
-        const summaryData = await fetchWithCache('https://data.techforpalestine.org/api/v3/summary.json');
+        // Load summary data (correct API endpoint)
+        const summaryData = await fetchWithCache('https://data.techforpalestine.org/api/summary.json');
         currentData.summary = summaryData;
 
         // Load daily casualties
         const dailyData = await fetchWithCache('https://data.techforpalestine.org/api/v2/casualties_daily.json');
         currentData.daily = dailyData;
 
-        // Load infrastructure data
-        const infraData = await fetchWithCache('https://data.techforpalestine.org/api/v3/infrastructure-damaged.json');
+        // Load infrastructure data (correct API endpoint)
+        const infraData = await fetchWithCache('https://data.techforpalestine.org/api/infrastructure-damaged.json');
         currentData.infrastructure = infraData;
 
         const loadTime = Date.now() - startTime;
@@ -259,8 +259,8 @@ function displayRealityData() {
     const summary = currentData.summary;
     
     // Update last updated timestamp
-    if (lastUpdated && summary.gaza?.last_update) {
-        const updateDate = new Date(summary.gaza.last_update);
+    if (lastUpdated && summary.lastDailyUpdate) {
+        const updateDate = new Date(summary.lastDailyUpdate);
         lastUpdated.textContent = `Last updated: ${updateDate.toLocaleDateString('en-US', { 
             year: 'numeric', 
             month: 'long', 
@@ -274,10 +274,10 @@ function displayRealityData() {
         announcer.textContent = 'Real-time data has been loaded showing current casualties and infrastructure damage.';
     }
 
-    // Extract data from API response
-    const childrenKilled = summary.gaza?.killed?.children || 0;
-    const totalKilled = summary.gaza?.killed?.total || 0;
-    const womenKilled = summary.gaza?.killed?.women || 0;
+    // Extract data from API response (correct structure)
+    const childrenKilled = summary.killed?.children || 0;
+    const totalKilled = summary.killed?.total || 0;
+    const womenKilled = summary.killed?.women || 0;
     
     const childrenExcess = Math.round((childrenKilled / userThresholds.children) * 100);
     const peopleExcess = Math.round((totalKilled / userThresholds.people) * 100);
