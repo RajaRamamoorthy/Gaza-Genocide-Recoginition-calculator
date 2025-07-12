@@ -30,8 +30,11 @@ The project is designed as a static website using pure HTML, CSS, and JavaScript
 - Progressive revelation of absurdity in the questions
 
 ### 2. Data Integration Layer
-- Client-side API integration with Tech For Palestine APIs
-- Real-time humanitarian data fetching
+- Client-side API integration with Tech For Palestine APIs v2
+- Real-time humanitarian data fetching from `/api/v2/summary.json`
+- CORS proxy implementation using `api.allorigins.win` to bypass browser restrictions
+- Smart caching system with 5-minute cache duration to minimize API calls
+- Automatic retry logic with exponential backoff for failed requests
 - No API key management required (public APIs)
 
 ### 3. Narrative Flow Engine
@@ -58,10 +61,16 @@ The project is designed as a static website using pure HTML, CSS, and JavaScript
 ## External Dependencies
 
 ### APIs
-- **Tech For Palestine APIs**: Public humanitarian data APIs
+- **Tech For Palestine APIs v2**: Public humanitarian data APIs
+  - Endpoint: `https://data.techforpalestine.org/api/v2/summary.json`
   - No authentication required
-  - Client-side accessible
-  - Real-time casualty and infrastructure data
+  - Client-side accessible via CORS proxy
+  - Returns comprehensive casualty data including:
+    - Total killed count
+    - Children and women casualties
+    - Medical personnel and press casualties
+    - Last daily update timestamp
+  - CORS Proxy: `https://api.allorigins.win/raw?url=` for cross-origin access
 
 ### Hosting Requirements
 - **Static file hosting** capability
@@ -83,8 +92,10 @@ The project is designed as a static website using pure HTML, CSS, and JavaScript
 
 ### Security Considerations
 - **Enhanced Content Security Policy** - removed unsafe-inline and unsafe-eval
+- **CORS proxy whitelisted** - api.allorigins.win added to connect-src
 - **Nonce-based script execution** for Google Analytics
 - **Privacy-enhanced analytics** - IP anonymization, no ad personalization
+- **Dynamic style application** - replaced inline styles with data attributes + JavaScript
 - No user data collection or storage
 - No cookies or localStorage for personal information
 - HTTPS-only deployment required

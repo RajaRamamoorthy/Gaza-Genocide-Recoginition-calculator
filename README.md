@@ -56,9 +56,12 @@ The UI/UX deliberately evolves throughout the user journey:
 
 ## 📊 Data Sources
 
-- **Primary**: [Tech For Palestine APIs](https://data.techforpalestine.org/)
-- **Real-time Updates**: Casualty figures, infrastructure damage, humanitarian statistics
+- **Primary**: [Tech For Palestine APIs v2](https://data.techforpalestine.org/)
+- **API Endpoint**: `https://data.techforpalestine.org/api/v2/summary.json`
+- **Real-time Updates**: Casualty figures including total killed, children, women, and more
+- **CORS Proxy**: Uses `api.allorigins.win` to bypass cross-origin restrictions
 - **No Authentication Required**: Public APIs accessible client-side
+- **Last Updated**: July 11, 2025 (57,823 total killed, 18,000 children, 12,400 women)
 
 ## 🚀 Getting Started
 
@@ -107,6 +110,62 @@ The experience includes comprehensive analytics to understand user engagement:
 - **Threshold Analytics**: Distribution of user-set recognition thresholds
 - **Engagement Metrics**: Time on page, scroll depth, interaction patterns
 - **Conversion Tracking**: Click-through rates to humanitarian organizations
+
+## 🔧 Troubleshooting
+
+### Common Issues and Solutions
+
+#### API Data Not Loading
+- **Issue**: "Unable to Load Current Data" error message
+- **Cause**: CORS restrictions or API connectivity issues
+- **Solution**: The app uses a CORS proxy (api.allorigins.win) to bypass browser restrictions. If the proxy is down, data may not load.
+
+#### Content Security Policy Errors
+- **Issue**: Console errors about CSP violations
+- **Solution**: All necessary domains are whitelisted in the CSP header, including the CORS proxy
+
+#### Slow Loading Times
+- **Issue**: API requests taking too long
+- **Solution**: The app implements a 5-minute cache and retry logic with exponential backoff
+
+### Technical Details
+- **API Version**: Tech For Palestine v2 API
+- **Primary Endpoint**: `/api/v2/summary.json`
+- **CORS Proxy**: `https://api.allorigins.win/`
+- **Cache Duration**: 5 minutes
+- **Retry Attempts**: 3 with exponential backoff
+
+## 🏗️ Implementation Details
+
+### API Integration
+```javascript
+// CORS proxy implementation
+const corsProxy = 'https://api.allorigins.win/raw?url=';
+const proxiedUrl = corsProxy + encodeURIComponent(apiUrl);
+
+// Data structure returned by API
+{
+  "killedInGazaListCount": 55202,
+  "massacres": 12000,
+  "killed": {
+    "total": 57823,
+    "children": 18000,
+    "women": 12400,
+    "civilDefence": 115,
+    "press": 228,
+    "medical": 1584
+  },
+  "injured": {
+    "total": 137887
+  },
+  "lastDailyUpdate": "2025-07-11"
+}
+```
+
+### Security Headers
+- Content Security Policy includes all necessary domains
+- No inline styles or scripts (CSP compliant)
+- All external resources properly whitelisted
 
 ## 🔒 Privacy & Security
 
