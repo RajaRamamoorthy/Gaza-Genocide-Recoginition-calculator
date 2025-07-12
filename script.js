@@ -471,10 +471,9 @@ function dismissWarning() {
     console.log('Warning element found:', !!warningElement); // Debug log
     
     if (warningElement) {
-        // Use CSS class instead of inline styles to avoid CSP violations
-        warningElement.classList.add('hidden');
-        console.log('Warning modal hidden with CSS class'); // Debug log
-        console.log('Hidden class added:', warningElement.classList.contains('hidden'));
+        // Remove the entire element from DOM
+        warningElement.remove();
+        console.log('Warning modal completely removed from DOM'); // Debug log
     } else {
         console.error('Warning element not found!');
     }
@@ -522,12 +521,26 @@ function trackUserEngagement() {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, setting up warning modal'); // Debug log
+    
     // Track page load and user session start
     trackEvent('page_loaded', 'user_flow', 'how_many_more_experience');
     trackEvent('session_started', 'user_behavior', 'interactive_experience');
     
     initializeSliders();
     trackUserEngagement();
+    
+    // Set up warning button event listener
+    const dismissBtn = document.getElementById('dismiss-warning-btn');
+    console.log('Dismiss button found:', !!dismissBtn); // Debug log
+    
+    if (dismissBtn) {
+        dismissBtn.addEventListener('click', function(e) {
+            console.log('Dismiss button clicked via event listener'); // Debug log
+            e.preventDefault();
+            dismissWarning();
+        });
+    }
     
     // Check if user has seen warning before
     let hasSeenWarning = false;
@@ -539,21 +552,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (hasSeenWarning) {
         // Clear warning and show threshold section for returning users
-        const warningElement = document.getElementById('content-warning');
-        if (warningElement) {
-            warningElement.classList.add('hidden');
-        }
-        const thresholdSection = document.getElementById('threshold-section');
-        if (thresholdSection) {
-            thresholdSection.classList.add('active');
-        }
+        dismissWarning();
     } else {
         trackEvent('content_warning_shown', 'user_flow', 'warning_modal_displayed');
-        // Ensure warning is visible for new users
-        const warningElement = document.getElementById('content-warning');
-        if (warningElement) {
-            warningElement.classList.remove('hidden');
-        }
+        console.log('Showing warning modal for new user'); // Debug log
     }
 });
 
