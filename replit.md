@@ -103,6 +103,17 @@ The project is designed as a static website using pure HTML, CSS, and JavaScript
 - **Comprehensive crawler permissions** in robots.txt
 
 ## Changelog
+- **July 12, 2025: Gaza-Specific SEO Optimization**
+  - Added crucial Gaza and Palestine keywords throughout all meta tags
+  - Updated title to "Gaza Genocide Recognition Calculator - Real-time Palestinian Crisis Data"
+  - Revised meta description to explicitly mention Gaza genocide and Palestinian casualties
+  - Added comprehensive Gaza-specific keywords: gaza genocide, palestine humanitarian crisis, palestinian children killed, gaza death toll, gaza war crimes, tech for palestine
+  - Updated all Open Graph tags to mention Gaza and Palestine explicitly
+  - Enhanced Twitter Card with actual casualty numbers (57,000+ killed, 18,000+ children)
+  - Updated JSON-LD schema to reference Gaza genocide and Palestinian crisis
+  - Revised social media images (og-image.svg, twitter-card.svg) to include Gaza-specific content and casualty statistics
+  - Updated README.md to focus on Gaza genocide context
+  - Fixed broken classification meta tag
 - **July 12, 2025: Major SEO & Metadata Overhaul**
   - Removed redundant "How Many More" mentions across all meta tags
   - Updated all SEO meta tags with focused keywords and better descriptions

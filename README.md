@@ -1,11 +1,11 @@
 
-# The Genocide Recognition Calculator
+# Gaza Genocide Recognition Calculator
 
-An interactive web application that challenges users to confront their thresholds for recognizing humanitarian catastrophe through a provocative calculator interface that reveals the stark reality of ongoing crises.
+An interactive web application exposing the ongoing genocide in Gaza with real-time Palestinian casualty data. This tool challenges users to confront their thresholds for recognizing the humanitarian catastrophe unfolding in Palestine.
 
 ## 🎯 Project Overview
 
-The Genocide Recognition Calculator is a powerful educational tool designed to challenge our collective desensitization to humanitarian crises. Through a unique four-phase narrative journey, users are guided from satirical engagement to sobering reality, ultimately leading to constructive action.
+The Gaza Genocide Recognition Calculator is a powerful educational tool that reveals the stark reality of the Palestinian genocide through real-time data from Tech for Palestine APIs. By challenging users' desensitization to the massive loss of life in Gaza, including over 18,000 children killed, the tool guides users through a four-phase journey from satirical engagement to sobering reality.
 
 ### Key Features
 

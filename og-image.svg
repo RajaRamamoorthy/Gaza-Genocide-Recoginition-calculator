@@ -4,16 +4,21 @@
   <rect width="1200" height="630" fill="#dc2626"/>
   
   <!-- Main Title -->
-  <text x="600" y="200" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" fill="white">
-    The Genocide
+  <text x="600" y="180" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="bold" fill="white">
+    Gaza Genocide
   </text>
-  <text x="600" y="280" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" fill="white">
+  <text x="600" y="250" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="bold" fill="white">
     Recognition Calculator
   </text>
   
   <!-- Subtitle -->
-  <text x="600" y="360" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="32" fill="white" opacity="0.9">
-    An Interactive Humanitarian Awareness Tool
+  <text x="600" y="330" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="white" opacity="0.9">
+    Real-time Palestinian Casualty Data
+  </text>
+  
+  <!-- Stats -->
+  <text x="600" y="400" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="white" opacity="0.8">
+    57,000+ Palestinians Killed • 18,000+ Children
   </text>
   
   <!-- URL -->
