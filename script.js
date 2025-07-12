@@ -471,18 +471,10 @@ function dismissWarning() {
     console.log('Warning element found:', !!warningElement); // Debug log
     
     if (warningElement) {
-        // Try multiple methods to ensure the modal is hidden
-        warningElement.style.display = 'none';
-        warningElement.style.visibility = 'hidden';
-        warningElement.style.opacity = '0';
-        warningElement.style.zIndex = '-1';
-        console.log('Warning modal hidden with multiple methods'); // Debug log
-        console.log('Final styles:', {
-            display: warningElement.style.display,
-            visibility: warningElement.style.visibility,
-            opacity: warningElement.style.opacity,
-            zIndex: warningElement.style.zIndex
-        });
+        // Use CSS class instead of inline styles to avoid CSP violations
+        warningElement.classList.add('hidden');
+        console.log('Warning modal hidden with CSS class'); // Debug log
+        console.log('Hidden class added:', warningElement.classList.contains('hidden'));
     } else {
         console.error('Warning element not found!');
     }
@@ -549,7 +541,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear warning and show threshold section for returning users
         const warningElement = document.getElementById('content-warning');
         if (warningElement) {
-            warningElement.style.display = 'none';
+            warningElement.classList.add('hidden');
         }
         const thresholdSection = document.getElementById('threshold-section');
         if (thresholdSection) {
@@ -560,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Ensure warning is visible for new users
         const warningElement = document.getElementById('content-warning');
         if (warningElement) {
-            warningElement.style.display = 'flex';
+            warningElement.classList.remove('hidden');
         }
     }
 });
