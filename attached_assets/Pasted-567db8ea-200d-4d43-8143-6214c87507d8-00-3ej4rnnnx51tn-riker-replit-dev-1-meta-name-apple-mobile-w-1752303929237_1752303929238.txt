@@ -1,0 +1,80 @@
+567db8ea-200d-4d43-8143-6214c87507d8-00-3ej4rnnnx51tn.riker.replit.dev/:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+script.js:17 Fetching API data from: https://data.techforpalestine.org/api/v2/summary.json
+script.js:31 API fetch attempt 1 for https://data.techforpalestine.org/api/v2/summary.json
+567db8ea-200d-4d43-8143-6214c87507d8-00-3ej4rnnnx51tn.riker.replit.dev/:1 Access to fetch at 'https://api.allorigins.win/raw?url=https%3A%2F%2Fdata.techforpalestine.org%2Fapi%2Fv2%2Fsummary.json' from origin 'https://567db8ea-200d-4d43-8143-6214c87507d8-00-3ej4rnnnx51tn.riker.replit.dev' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+script.js:32  GET https://api.allorigins.win/raw?url=https%3A%2F%2Fdata.techforpalestine.org%2Fapi%2Fv2%2Fsummary.json net::ERR_FAILED 500 (Internal Server Error)
+fetchWithCache @ script.js:32
+loadApiData @ script.js:176
+revealReality @ script.js:224
+(anonymous) @ script.js:566
+script.js:51 API fetch attempt 1 failed for https://data.techforpalestine.org/api/v2/summary.json: TypeError: Failed to fetch
+    at fetchWithCache (script.js:32:36)
+    at loadApiData (script.js:176:35)
+    at revealReality (script.js:224:30)
+    at HTMLButtonElement.<anonymous> (script.js:566:13)
+overrideMethod @ hook.js:608
+fetchWithCache @ script.js:51
+await in fetchWithCache
+loadApiData @ script.js:176
+revealReality @ script.js:224
+(anonymous) @ script.js:566
+script.js:31 API fetch attempt 2 for https://data.techforpalestine.org/api/v2/summary.json
+script.js:40 Response status: 200 for https://data.techforpalestine.org/api/v2/summary.json
+script.js:47 Successfully fetched data from https://data.techforpalestine.org/api/v2/summary.json: {killedInGazaListCount: 55202, massacres: 12000, killed: {…}, injured: {…}, dailyReportCount: 644, …}
+script.js:17 Fetching API data from: https://data.techforpalestine.org/api/v2/casualties_daily.json
+script.js:31 API fetch attempt 1 for https://data.techforpalestine.org/api/v2/casualties_daily.json
+script.js:40 Response status: 200 for https://data.techforpalestine.org/api/v2/casualties_daily.json
+script.js:32  GET https://api.allorigins.win/raw?url=https%3A%2F%2Fdata.techforpalestine.org%2Fapi%2Fv2%2Fcasualties_daily.json net::ERR_HTTP2_PROTOCOL_ERROR 200 (OK)
+fetchWithCache @ script.js:32
+loadApiData @ script.js:180
+await in loadApiData
+revealReality @ script.js:224
+(anonymous) @ script.js:566
+script.js:51 API fetch attempt 1 failed for https://data.techforpalestine.org/api/v2/casualties_daily.json: TypeError: Failed to fetch
+overrideMethod @ hook.js:608
+fetchWithCache @ script.js:51
+await in fetchWithCache
+loadApiData @ script.js:180
+await in loadApiData
+revealReality @ script.js:224
+(anonymous) @ script.js:566
+script.js:31 API fetch attempt 2 for https://data.techforpalestine.org/api/v2/casualties_daily.json
+script.js:40 Response status: 200 for https://data.techforpalestine.org/api/v2/casualties_daily.json
+script.js:32  GET https://api.allorigins.win/raw?url=https%3A%2F%2Fdata.techforpalestine.org%2Fapi%2Fv2%2Fcasualties_daily.json net::ERR_HTTP2_PROTOCOL_ERROR 200 (OK)
+fetchWithCache @ script.js:32
+await in fetchWithCache
+loadApiData @ script.js:180
+await in loadApiData
+revealReality @ script.js:224
+(anonymous) @ script.js:566
+script.js:51 API fetch attempt 2 failed for https://data.techforpalestine.org/api/v2/casualties_daily.json: TypeError: Failed to fetch
+overrideMethod @ hook.js:608
+fetchWithCache @ script.js:51
+await in fetchWithCache
+loadApiData @ script.js:180
+await in loadApiData
+revealReality @ script.js:224
+(anonymous) @ script.js:566
+script.js:31 API fetch attempt 3 for https://data.techforpalestine.org/api/v2/casualties_daily.json
+script.js:40 Response status: 200 for https://data.techforpalestine.org/api/v2/casualties_daily.json
+script.js:32  GET https://api.allorigins.win/raw?url=https%3A%2F%2Fdata.techforpalestine.org%2Fapi%2Fv2%2Fcasualties_daily.json net::ERR_HTTP2_PROTOCOL_ERROR 200 (OK)
+fetchWithCache @ script.js:32
+await in fetchWithCache
+loadApiData @ script.js:180
+await in loadApiData
+revealReality @ script.js:224
+(anonymous) @ script.js:566
+script.js:51 API fetch attempt 3 failed for https://data.techforpalestine.org/api/v2/casualties_daily.json: TypeError: Failed to fetch
+overrideMethod @ hook.js:608
+fetchWithCache @ script.js:51
+await in fetchWithCache
+loadApiData @ script.js:180
+await in loadApiData
+revealReality @ script.js:224
+(anonymous) @ script.js:566
+script.js:192 Failed to load API data: TypeError: Failed to fetch
+overrideMethod @ hook.js:608
+loadApiData @ script.js:192
+await in loadApiData
+revealReality @ script.js:224
+(anonymous) @ script.js:566

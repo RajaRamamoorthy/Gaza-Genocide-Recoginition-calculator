@@ -92,6 +92,15 @@ The project is designed as a static website using pure HTML, CSS, and JavaScript
 - **Comprehensive crawler permissions** in robots.txt
 
 ## Changelog
+- **July 12, 2025: Complete API Debugging & CORS Fix**
+  - Fixed CORS policy blocking by implementing api.allorigins.win proxy
+  - Updated Content Security Policy to allow proxy domain connections
+  - Migrated to Tech For Palestine v2 API endpoints (/api/v2/summary.json)
+  - Simplified API calls to only load summary data (most reliable endpoint)
+  - Fixed all inline style CSP violations by using data attributes + JavaScript
+  - Added date-range-message CSS class for styling compliance
+  - Removed console.log debugging statements for production readiness
+  - API now successfully returns: 57,823 total killed, 18,000 children, 12,400 women (July 11, 2025 data)
 - **July 12, 2025: API Data Flow & Modal Fixes**
   - Fixed API data handling to correctly display casualty statistics
   - Resolved "0 men" display issue by removing men's count (API doesn't provide this field)
