@@ -1,6 +1,6 @@
 // API Cache for minimizing requests
 const apiCache = new Map();
-const CACHE_DURATION = 0; // Disable caching for debugging
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 // User thresholds
 let userThresholds = {
@@ -18,9 +18,6 @@ async function fetchWithCache(url, retries = 3, delay = 1000) {
     if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
         return cached.data;
     }
-    
-    // Clear any old cache to ensure fresh data
-    apiCache.delete(url);
     
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
@@ -216,15 +213,9 @@ async function revealReality() {
     // Load data
     const dataLoaded = await loadApiData();
     
-    console.log('Data loaded:', dataLoaded); // Debug log
-    console.log('currentData.summary exists:', !!currentData.summary); // Debug log
-    console.log('currentData.summary content:', currentData.summary); // Debug log
-    
     if (dataLoaded && currentData.summary) {
-        console.log('Calling displayRealityData()'); // Debug log
         displayRealityData();
     } else {
-        console.log('Calling displayErrorState()'); // Debug log
         displayErrorState();
     }
 
@@ -268,39 +259,13 @@ function displayRealityData() {
     const summary = currentData.summary;
     
     // Update last updated timestamp
-    console.log('Looking for last-updated element...'); // Debug log
-    console.log('lastUpdated element found:', !!lastUpdated); // Debug log
-    console.log('Full API summary object:', summary); // Debug log
-    
-    if (lastUpdated) {
-        // Check both gaza.last_update and root level last_update
-        const lastUpdateDate = summary.gaza?.last_update || summary.last_update;
-        console.log('API last_update found:', lastUpdateDate); // Debug log
-        console.log('Current lastUpdated.textContent before update:', lastUpdated.textContent); // Debug log
-        
-        if (lastUpdateDate) {
-            const updateDate = new Date(lastUpdateDate);
-            const formattedDate = updateDate.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-            console.log('Formatted date:', formattedDate); // Debug log
-            lastUpdated.textContent = `Last updated: ${formattedDate}`;
-            console.log('lastUpdated.textContent after update:', lastUpdated.textContent); // Debug log
-        } else {
-            // Fallback to current date if API doesn't provide last_update
-            const currentDate = new Date();
-            const formattedCurrentDate = currentDate.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-            lastUpdated.textContent = `Last updated: ${formattedCurrentDate} (estimated)`;
-            console.log('No last_update in API, using current date:', formattedCurrentDate); // Debug log
-        }
-    } else {
-        console.log('lastUpdated element not found!'); // Debug log
+    if (lastUpdated && summary.gaza?.last_update) {
+        const updateDate = new Date(summary.gaza.last_update);
+        lastUpdated.textContent = `Last updated: ${updateDate.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        })}`;
     }
 
     // Announce data load for screen readers
@@ -309,11 +274,10 @@ function displayRealityData() {
         announcer.textContent = 'Real-time data has been loaded showing current casualties and infrastructure damage.';
     }
 
+    // Extract data from API response
     const childrenKilled = summary.gaza?.killed?.children || 0;
     const totalKilled = summary.gaza?.killed?.total || 0;
     const womenKilled = summary.gaza?.killed?.women || 0;
-    // Calculate men by subtracting women and children from total
-    const menKilled = Math.max(0, totalKilled - womenKilled - childrenKilled);
     
     const childrenExcess = Math.round((childrenKilled / userThresholds.children) * 100);
     const peopleExcess = Math.round((totalKilled / userThresholds.people) * 100);
@@ -367,7 +331,7 @@ function displayRealityData() {
                     <div class="progress-bar">
                         <div class="progress-fill" style="--progress-width: ${Math.min(peopleExcess, 100)}%;"></div>
                     </div>
-                    <div class="impact-text">Including ${formatNumber(womenKilled)} women and ${formatNumber(menKilled)} men</div>
+                    <div class="impact-text">Including ${formatNumber(childrenKilled)} children and ${formatNumber(womenKilled)} women</div>
                 </div>
                 
                 <div class="comparison-item">
