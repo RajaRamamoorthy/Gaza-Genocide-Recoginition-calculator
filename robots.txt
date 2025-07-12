@@ -44,7 +44,7 @@ User-agent: WhatsApp
 Allow: /
 
 # Sitemap location
-Sitemap: https://howmanymore.xyz/sitemap.xml
+Sitemap: https://gaza-genocide-threshold.replit.app/sitemap.xml
 
 # Humanitarian awareness content - comprehensive indexing encouraged
 # This educational tool serves public interest and crisis awareness

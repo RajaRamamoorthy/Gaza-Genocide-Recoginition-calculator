@@ -103,6 +103,16 @@ The project is designed as a static website using pure HTML, CSS, and JavaScript
 - **Comprehensive crawler permissions** in robots.txt
 
 ## Changelog
+- **July 12, 2025: Domain Update to Replit App**
+  - Updated all URLs from howmanymore.xyz to gaza-genocide-threshold.replit.app
+  - Changed canonical URL to Replit domain
+  - Updated all Open Graph image URLs
+  - Updated Twitter Card image URLs
+  - Updated sitemap.xml with new domain
+  - Updated robots.txt sitemap location
+  - Updated og-image.svg to show correct domain
+  - Updated README.md with correct live site URL
+  - Updated all JSON-LD schema URLs
 - **July 12, 2025: Gaza-Specific SEO Optimization**
   - Added crucial Gaza and Palestine keywords throughout all meta tags
   - Updated title to "Gaza Genocide Recognition Calculator - Real-time Palestinian Crisis Data"

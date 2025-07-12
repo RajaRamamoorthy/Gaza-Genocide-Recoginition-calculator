@@ -18,7 +18,7 @@ The Gaza Genocide Recognition Calculator is a powerful educational tool that rev
 
 ## 🚀 Live Demo
 
-Visit the live experience: [Genocide Recognition Calculator](https://howmanymore.xyz)
+Visit the live experience: [Gaza Genocide Recognition Calculator](https://gaza-genocide-threshold.replit.app)
 
 ## 📱 Screenshots
 
@@ -232,7 +232,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions, suggestions, or collaboration opportunities:
 
-- **Website**: [howmanymore.xyz](https://howmanymore.xyz)
+- **Website**: [gaza-genocide-threshold.replit.app](https://gaza-genocide-threshold.replit.app)
 - **Issues**: Use GitHub Issues for bug reports and feature requests
 - **Email**: Contact through the website
 
