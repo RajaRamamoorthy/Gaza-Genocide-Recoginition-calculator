@@ -260,8 +260,12 @@ function displayRealityData() {
     
     // Update last updated timestamp
     if (lastUpdated) {
-        if (summary.last_update) {
-            const updateDate = new Date(summary.last_update);
+        // Check both gaza.last_update and root level last_update
+        const lastUpdateDate = summary.gaza?.last_update || summary.last_update;
+        console.log('API last_update found:', lastUpdateDate); // Debug log
+        
+        if (lastUpdateDate) {
+            const updateDate = new Date(lastUpdateDate);
             lastUpdated.textContent = `Last updated: ${updateDate.toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'long', 
@@ -275,6 +279,7 @@ function displayRealityData() {
                 month: 'long', 
                 day: 'numeric' 
             })} (estimated)`;
+            console.log('No last_update in API, using current date'); // Debug log
         }
     }
 
