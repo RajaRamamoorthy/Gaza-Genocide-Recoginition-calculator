@@ -456,8 +456,6 @@ function trackUserThreshold(type, value) {
 
 // Content warning functions
 function dismissWarning() {
-    console.log('dismissWarning() called'); // Debug log
-    
     trackEvent('content_warning_dismissed', 'user_flow', 'warning_modal');
     
     // Use sessionStorage safely
@@ -468,21 +466,14 @@ function dismissWarning() {
     }
     
     const warningElement = document.getElementById('content-warning');
-    console.log('Warning element found:', !!warningElement); // Debug log
-    
     if (warningElement) {
-        // Remove the entire element from DOM
         warningElement.remove();
-        console.log('Warning modal completely removed from DOM'); // Debug log
-    } else {
-        console.error('Warning element not found!');
     }
     
     // Activate threshold section immediately
     const thresholdSection = document.getElementById('threshold-section');
     if (thresholdSection) {
         thresholdSection.classList.add('active');
-        console.log('Threshold section activated'); // Debug log
     }
 }
 
@@ -521,8 +512,6 @@ function trackUserEngagement() {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, setting up warning modal'); // Debug log
-    
     // Track page load and user session start
     trackEvent('page_loaded', 'user_flow', 'how_many_more_experience');
     trackEvent('session_started', 'user_behavior', 'interactive_experience');
@@ -532,11 +521,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Set up warning button event listener
     const dismissBtn = document.getElementById('dismiss-warning-btn');
-    console.log('Dismiss button found:', !!dismissBtn); // Debug log
-    
     if (dismissBtn) {
         dismissBtn.addEventListener('click', function(e) {
-            console.log('Dismiss button clicked via event listener'); // Debug log
             e.preventDefault();
             dismissWarning();
         });
@@ -551,11 +537,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     if (hasSeenWarning) {
-        // Clear warning and show threshold section for returning users
         dismissWarning();
     } else {
         trackEvent('content_warning_shown', 'user_flow', 'warning_modal_displayed');
-        console.log('Showing warning modal for new user'); // Debug log
     }
 });
 

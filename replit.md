@@ -92,6 +92,13 @@ The project is designed as a static website using pure HTML, CSS, and JavaScript
 - **Comprehensive crawler permissions** in robots.txt
 
 ## Changelog
+- **July 12, 2025: API Data Flow & Modal Fixes**
+  - Fixed API data handling to correctly display casualty statistics
+  - Resolved "0 men" display issue by removing men's count (API doesn't provide this field)
+  - Fixed content warning modal closure by using event listeners instead of onclick
+  - Resolved Content Security Policy conflicts preventing inline styles
+  - Updated date display to show current API data (July 11, 2025)
+  - Improved error handling and removed debugging code after fixes
 - January 12, 2025: **Major Architecture & Security Improvements**
   - Separated HTML, CSS, and JavaScript into individual files
   - Enhanced Content Security Policy (removed unsafe-inline/unsafe-eval)
