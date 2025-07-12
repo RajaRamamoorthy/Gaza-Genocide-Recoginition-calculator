@@ -259,13 +259,23 @@ function displayRealityData() {
     const summary = currentData.summary;
     
     // Update last updated timestamp
-    if (summary.last_update && lastUpdated) {
-        const updateDate = new Date(summary.last_update);
-        lastUpdated.textContent = `Last updated: ${updateDate.toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        })}`;
+    if (lastUpdated) {
+        if (summary.last_update) {
+            const updateDate = new Date(summary.last_update);
+            lastUpdated.textContent = `Last updated: ${updateDate.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            })}`;
+        } else {
+            // Fallback to current date if API doesn't provide last_update
+            const currentDate = new Date();
+            lastUpdated.textContent = `Last updated: ${currentDate.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            })} (estimated)`;
+        }
     }
 
     // Announce data load for screen readers
@@ -399,7 +409,14 @@ function generateDateRangeDisplay() {
 // Display error state
 function displayErrorState() {
     const realityData = document.getElementById('reality-data');
+    const lastUpdated = document.querySelector('.last-updated');
+    
     if (!realityData) return;
+    
+    // Update timestamp even in error state
+    if (lastUpdated) {
+        lastUpdated.textContent = `Data unavailable - please check Tech For Palestine directly`;
+    }
     
     realityData.innerHTML = `
         <div class="error-message">
