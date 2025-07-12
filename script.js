@@ -456,6 +456,8 @@ function trackUserThreshold(type, value) {
 
 // Content warning functions
 function dismissWarning() {
+    console.log('dismissWarning() called'); // Debug log
+    
     trackEvent('content_warning_dismissed', 'user_flow', 'warning_modal');
     
     // Use sessionStorage safely
@@ -466,16 +468,19 @@ function dismissWarning() {
     }
     
     const warningElement = document.getElementById('content-warning');
+    console.log('Warning element found:', !!warningElement); // Debug log
+    
     if (warningElement) {
         warningElement.style.display = 'none';
+        console.log('Warning modal hidden'); // Debug log
     }
     
-    setTimeout(() => {
-        const thresholdSection = document.getElementById('threshold-section');
-        if (thresholdSection) {
-            thresholdSection.classList.add('active');
-        }
-    }, 1000);
+    // Activate threshold section immediately
+    const thresholdSection = document.getElementById('threshold-section');
+    if (thresholdSection) {
+        thresholdSection.classList.add('active');
+        console.log('Threshold section activated'); // Debug log
+    }
 }
 
 // Track scroll behavior and engagement
@@ -529,9 +534,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     if (hasSeenWarning) {
-        dismissWarning();
+        // Clear warning and show threshold section for returning users
+        const warningElement = document.getElementById('content-warning');
+        if (warningElement) {
+            warningElement.style.display = 'none';
+        }
+        const thresholdSection = document.getElementById('threshold-section');
+        if (thresholdSection) {
+            thresholdSection.classList.add('active');
+        }
     } else {
         trackEvent('content_warning_shown', 'user_flow', 'warning_modal_displayed');
+        // Ensure warning is visible for new users
+        const warningElement = document.getElementById('content-warning');
+        if (warningElement) {
+            warningElement.style.display = 'flex';
+        }
     }
 });
 
