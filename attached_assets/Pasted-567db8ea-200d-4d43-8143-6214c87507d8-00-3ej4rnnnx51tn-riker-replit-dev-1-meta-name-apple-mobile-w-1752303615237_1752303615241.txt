@@ -1,0 +1,65 @@
+567db8ea-200d-4d43-8143-6214c87507d8-00-3ej4rnnnx51tn.riker.replit.dev/:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+script.js:17 Fetching API data from: https://data.techforpalestine.org/api/v2/summary.json
+script.js:27 API fetch attempt 1 for https://data.techforpalestine.org/api/v2/summary.json
+567db8ea-200d-4d43-8143-6214c87507d8-00-3ej4rnnnx51tn.riker.replit.dev/:1 Access to fetch at 'https://data.techforpalestine.org/api/v2/summary.json' from origin 'https://567db8ea-200d-4d43-8143-6214c87507d8-00-3ej4rnnnx51tn.riker.replit.dev' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.
+script.js:28  GET https://data.techforpalestine.org/api/v2/summary.json net::ERR_FAILED
+fetchWithCache @ script.js:28
+loadApiData @ script.js:173
+revealReality @ script.js:221
+(anonymous) @ script.js:552
+script.js:48 API fetch attempt 1 failed for https://data.techforpalestine.org/api/v2/summary.json: TypeError: Failed to fetch
+    at fetchWithCache (script.js:28:36)
+    at loadApiData (script.js:173:35)
+    at revealReality (script.js:221:30)
+    at HTMLButtonElement.<anonymous> (script.js:552:13)
+overrideMethod @ hook.js:608
+fetchWithCache @ script.js:48
+await in fetchWithCache
+loadApiData @ script.js:173
+revealReality @ script.js:221
+(anonymous) @ script.js:552
+script.js:27 API fetch attempt 2 for https://data.techforpalestine.org/api/v2/summary.json
+567db8ea-200d-4d43-8143-6214c87507d8-00-3ej4rnnnx51tn.riker.replit.dev/:1 Access to fetch at 'https://data.techforpalestine.org/api/v2/summary.json' from origin 'https://567db8ea-200d-4d43-8143-6214c87507d8-00-3ej4rnnnx51tn.riker.replit.dev' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.
+script.js:28  GET https://data.techforpalestine.org/api/v2/summary.json net::ERR_FAILED
+fetchWithCache @ script.js:28
+await in fetchWithCache
+loadApiData @ script.js:173
+revealReality @ script.js:221
+(anonymous) @ script.js:552
+script.js:48 API fetch attempt 2 failed for https://data.techforpalestine.org/api/v2/summary.json: TypeError: Failed to fetch
+    at fetchWithCache (script.js:28:36)
+    at async loadApiData (script.js:173:29)
+    at async revealReality (script.js:221:24)
+overrideMethod @ hook.js:608
+fetchWithCache @ script.js:48
+await in fetchWithCache
+loadApiData @ script.js:173
+revealReality @ script.js:221
+(anonymous) @ script.js:552
+script.js:27 API fetch attempt 3 for https://data.techforpalestine.org/api/v2/summary.json
+567db8ea-200d-4d43-8143-6214c87507d8-00-3ej4rnnnx51tn.riker.replit.dev/:1 Access to fetch at 'https://data.techforpalestine.org/api/v2/summary.json' from origin 'https://567db8ea-200d-4d43-8143-6214c87507d8-00-3ej4rnnnx51tn.riker.replit.dev' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.
+script.js:28  GET https://data.techforpalestine.org/api/v2/summary.json net::ERR_FAILED
+fetchWithCache @ script.js:28
+await in fetchWithCache
+loadApiData @ script.js:173
+revealReality @ script.js:221
+(anonymous) @ script.js:552
+script.js:48 API fetch attempt 3 failed for https://data.techforpalestine.org/api/v2/summary.json: TypeError: Failed to fetch
+    at fetchWithCache (script.js:28:36)
+    at async loadApiData (script.js:173:29)
+    at async revealReality (script.js:221:24)
+overrideMethod @ hook.js:608
+fetchWithCache @ script.js:48
+await in fetchWithCache
+loadApiData @ script.js:173
+revealReality @ script.js:221
+(anonymous) @ script.js:552
+script.js:189 Failed to load API data: TypeError: Failed to fetch
+    at fetchWithCache (script.js:28:36)
+    at async loadApiData (script.js:173:29)
+    at async revealReality (script.js:221:24)
+overrideMethod @ hook.js:608
+loadApiData @ script.js:189
+await in loadApiData
+revealReality @ script.js:221
+(anonymous) @ script.js:552

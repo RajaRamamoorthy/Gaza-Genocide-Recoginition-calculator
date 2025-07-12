@@ -22,16 +22,19 @@ async function fetchWithCache(url, retries = 3, delay = 1000) {
         return cached.data;
     }
     
+    // Use CORS proxy to bypass CORS restrictions
+    const corsProxy = 'https://api.allorigins.win/raw?url=';
+    const proxiedUrl = corsProxy + encodeURIComponent(url);
+    
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
             console.log(`API fetch attempt ${attempt} for ${url}`);
-            const response = await fetch(url, {
+            const response = await fetch(proxiedUrl, {
                 method: 'GET',
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Accept': 'application/json'
                 },
-                signal: AbortSignal.timeout(10000) // 10 second timeout
+                signal: AbortSignal.timeout(15000) // 15 second timeout for proxy
             });
             
             console.log(`Response status: ${response.status} for ${url}`);
