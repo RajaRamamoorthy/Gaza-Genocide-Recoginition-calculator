@@ -312,7 +312,8 @@ function displayRealityData() {
     const childrenKilled = summary.gaza?.killed?.children || 0;
     const totalKilled = summary.gaza?.killed?.total || 0;
     const womenKilled = summary.gaza?.killed?.women || 0;
-    const menKilled = summary.gaza?.killed?.men || 0;
+    // Calculate men by subtracting women and children from total
+    const menKilled = Math.max(0, totalKilled - womenKilled - childrenKilled);
     
     const childrenExcess = Math.round((childrenKilled / userThresholds.children) * 100);
     const peopleExcess = Math.round((totalKilled / userThresholds.people) * 100);
