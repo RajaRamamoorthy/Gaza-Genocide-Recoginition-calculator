@@ -19,6 +19,9 @@ async function fetchWithCache(url, retries = 3, delay = 1000) {
         return cached.data;
     }
     
+    // Clear any old cache to ensure fresh data
+    apiCache.delete(url);
+    
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
             const response = await fetch(url, {
@@ -259,28 +262,39 @@ function displayRealityData() {
     const summary = currentData.summary;
     
     // Update last updated timestamp
+    console.log('Looking for last-updated element...'); // Debug log
+    console.log('lastUpdated element found:', !!lastUpdated); // Debug log
+    console.log('Full API summary object:', summary); // Debug log
+    
     if (lastUpdated) {
         // Check both gaza.last_update and root level last_update
         const lastUpdateDate = summary.gaza?.last_update || summary.last_update;
         console.log('API last_update found:', lastUpdateDate); // Debug log
+        console.log('Current lastUpdated.textContent before update:', lastUpdated.textContent); // Debug log
         
         if (lastUpdateDate) {
             const updateDate = new Date(lastUpdateDate);
-            lastUpdated.textContent = `Last updated: ${updateDate.toLocaleDateString('en-US', { 
+            const formattedDate = updateDate.toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'long', 
                 day: 'numeric' 
-            })}`;
+            });
+            console.log('Formatted date:', formattedDate); // Debug log
+            lastUpdated.textContent = `Last updated: ${formattedDate}`;
+            console.log('lastUpdated.textContent after update:', lastUpdated.textContent); // Debug log
         } else {
             // Fallback to current date if API doesn't provide last_update
             const currentDate = new Date();
-            lastUpdated.textContent = `Last updated: ${currentDate.toLocaleDateString('en-US', { 
+            const formattedCurrentDate = currentDate.toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'long', 
                 day: 'numeric' 
-            })} (estimated)`;
-            console.log('No last_update in API, using current date'); // Debug log
+            });
+            lastUpdated.textContent = `Last updated: ${formattedCurrentDate} (estimated)`;
+            console.log('No last_update in API, using current date:', formattedCurrentDate); // Debug log
         }
+    } else {
+        console.log('lastUpdated element not found!'); // Debug log
     }
 
     // Announce data load for screen readers
