@@ -471,8 +471,9 @@ function dismissWarning() {
     console.log('Warning element found:', !!warningElement); // Debug log
     
     if (warningElement) {
-        warningElement.style.display = 'none';
-        console.log('Warning modal hidden'); // Debug log
+        // Remove the element completely instead of just hiding
+        warningElement.remove();
+        console.log('Warning modal removed'); // Debug log
     }
     
     // Activate threshold section immediately
