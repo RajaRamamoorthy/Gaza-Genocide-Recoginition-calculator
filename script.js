@@ -14,13 +14,17 @@ let currentData = {};
 
 // Fetch data with caching and improved error handling
 async function fetchWithCache(url, retries = 3, delay = 1000) {
+    console.log(`Fetching API data from: ${url}`);
+    
     const cached = apiCache.get(url);
     if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+        console.log(`Returning cached data for ${url}`);
         return cached.data;
     }
     
     for (let attempt = 1; attempt <= retries; attempt++) {
         try {
+            console.log(`API fetch attempt ${attempt} for ${url}`);
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -30,15 +34,18 @@ async function fetchWithCache(url, retries = 3, delay = 1000) {
                 signal: AbortSignal.timeout(10000) // 10 second timeout
             });
             
+            console.log(`Response status: ${response.status} for ${url}`);
+            
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
             const data = await response.json();
+            console.log(`Successfully fetched data from ${url}:`, data);
             apiCache.set(url, { data, timestamp: Date.now() });
             return data;
         } catch (error) {
-            console.error(`API fetch attempt ${attempt} failed:`, error);
+            console.error(`API fetch attempt ${attempt} failed for ${url}:`, error);
             
             if (attempt === retries) {
                 throw error;
@@ -162,8 +169,8 @@ async function loadApiData() {
     try {
         trackEvent('api_data_loading_started', 'data_source', 'tech_for_palestine');
         
-        // Load summary data (correct API endpoint)
-        const summaryData = await fetchWithCache('https://data.techforpalestine.org/api/summary.json');
+        // Load summary data (updated to v2 API endpoint)
+        const summaryData = await fetchWithCache('https://data.techforpalestine.org/api/v2/summary.json');
         currentData.summary = summaryData;
 
         // Load daily casualties
